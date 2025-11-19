@@ -1,1 +1,17 @@
 @import 'tailwindcss';
+
+@theme {
+	--font-serif: 'Crimson Pro Variable', serif;
+	--default-font-family: var(--font-serif);
+}
+
+@layer base {
+	body,
+	html {
+		@apply size-full;
+	}
+
+	body {
+		@apply relative isolate bg-stone-50;
+	}
+}
