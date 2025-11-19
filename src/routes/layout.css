@@ -12,6 +12,6 @@
 	}
 
 	body {
-		@apply relative isolate bg-stone-50;
+		@apply relative isolate bg-stone-50 select-none;
 	}
 }
