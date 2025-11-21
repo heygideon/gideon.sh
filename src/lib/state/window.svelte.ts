@@ -41,7 +41,7 @@ export const windowMap: Record<WindowName, WindowMapItem> = {
 		component: Contact,
 		title: 'Say hi!',
 		icon: message,
-		size: { width: 640, height: 480 }
+		size: { width: 640, height: 320 }
 	}
 };
 

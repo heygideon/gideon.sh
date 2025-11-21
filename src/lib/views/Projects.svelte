@@ -51,7 +51,7 @@
 		</p>
 	</div>
 {:else}
-	<div class="p-6 pb-0">
+	<div class="p-6 pb-3">
 		<p class="text-2xl leading-tight font-semibold">Things I've made</p>
 		<div class="mt-1 flex items-center gap-1.5 text-stone-600">
 			<FolderOpen class="size-4" />
