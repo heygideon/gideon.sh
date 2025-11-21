@@ -5,6 +5,8 @@
 	--default-font-family: var(--font-serif);
 }
 
+@custom-variant nd-dragging (&[data-neodrag-state="dragging"]);
+
 @layer base {
 	body,
 	html {
@@ -13,5 +15,9 @@
 
 	body {
 		@apply relative isolate bg-stone-50 select-none;
+	}
+
+	* {
+		@apply tracking-tight;
 	}
 }

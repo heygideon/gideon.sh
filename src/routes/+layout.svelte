@@ -1,5 +1,6 @@
 <script lang="ts">
-	import '@fontsource-variable/crimson-pro';
+	import '@fontsource-variable/crimson-pro/wght.css';
+	import '@fontsource-variable/crimson-pro/wght-italic.css';
 	import './layout.css';
 
 	import favicon from '$lib/assets/favicon.svg';

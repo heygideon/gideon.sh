@@ -14,6 +14,9 @@ importers:
       '@fontsource-variable/crimson-pro':
         specifier: ^5.2.8
         version: 5.2.8
+      '@neodrag/svelte':
+        specifier: 3.0.0-next.8
+        version: 3.0.0-next.8(@neodrag/core@3.0.0-next.8)(svelte@5.43.12)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -324,6 +327,15 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@neodrag/core@3.0.0-next.8':
+    resolution: {integrity: sha512-RNFwbo2w6M7BEzCh7pls68X2h3n+ofFDW1XnGyIzhtJ2bb8J/2VqixOpOlw9NfSJ61xgUC5ymGQbQFg5BKsWBA==}
+
+  '@neodrag/svelte@3.0.0-next.8':
+    resolution: {integrity: sha512-VkTnOqiHpAaEK5jp2PqQPEEx5AaNGVoKeoC2TuWd2xuteGOVq7NqQjNC4sxk0HAVysfYOC9YhYOsVyRiKo2LFw==}
+    peerDependencies:
+      '@neodrag/core': 3.0.0-next.8
+      svelte: ^3 || ^4 || ^5
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1612,6 +1624,13 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@neodrag/core@3.0.0-next.8': {}
+
+  '@neodrag/svelte@3.0.0-next.8(@neodrag/core@3.0.0-next.8)(svelte@5.43.12)':
+    dependencies:
+      '@neodrag/core': 3.0.0-next.8
+      svelte: 5.43.12
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

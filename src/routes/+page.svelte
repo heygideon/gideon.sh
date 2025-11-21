@@ -5,8 +5,10 @@
 	import message from '$lib/assets/images/message.png';
 
 	import Taskbar from '$lib/components/taskbar/Taskbar.svelte';
+	import Window from '$lib/components/window/Window.svelte';
 
 	import neocats from '$lib/assets/neocat';
+	import aww from '$lib/assets/neocat/aww.png';
 
 	let catIdx = $state(Math.floor(Math.random() * neocats.length));
 	let neocat = $derived(neocats[catIdx]);
@@ -28,7 +30,7 @@
 <div class="flex size-full flex-col items-center justify-center">
 	<div>
 		<div class="flex">
-			<h1 class="text-8xl tracking-tight">
+			<h1 class="text-8xl">
 				<span class="font-semibold">Hey, I’m Gideon,</span><br />
 				and I make things.
 			</h1>
@@ -71,3 +73,81 @@
 </div>
 
 <Taskbar />
+
+<Window width={640} height={480}>
+	<div class="space-y-6 p-6">
+		<section class="text-xl leading-snug">
+			<img src={aww} alt="" class="h-12" />
+			<p class="mt-2">
+				<span class="font-semibold">Heya, I’m Gideon!</span> I enjoy tinkering and making beautiful,
+				functional websites and apps.
+			</p>
+			<p class="mt-2">
+				I work all across the board, across frontend and backend. I’ve used tools like React,
+				Svelte, Tailwind, Next.js, Astro and more.
+			</p>
+		</section>
+		<section class="text-xl leading-snug">
+			<p class="mb-0.5 text-base text-stone-600 italic">Hobbies</p>
+			<p>Outside of coding:</p>
+			<ul class="mt-1.5 list-disc space-y-1 pl-6">
+				<li>swimming, and teaching swimming</li>
+				<li>studying</li>
+				<li>reading for pleasure (murder mystery)</li>
+				<li>playing piano and drumkit acceptably</li>
+				<li>sometimes, having fun</li>
+			</ul>
+		</section>
+		<section class="text-xl leading-snug">
+			<p class="mb-0.5 text-base text-stone-600 italic">Right now</p>
+			<p>
+				I’m working on infrastructure at <a
+					href="https://youthacks.org"
+					target="_blank"
+					class="underline decoration-1 underline-offset-2 transition hover:text-red-700"
+				>
+					Youthacks
+				</a>.
+			</p>
+		</section>
+	</div>
+</Window>
+
+<Window width={640} height={480}>
+	<div class="space-y-6 p-6">
+		<section class="text-xl leading-snug">
+			<img src={aww} alt="" class="h-12" />
+			<p class="mt-2">
+				<span class="font-semibold">Heya, I’m Gideon!</span> I enjoy tinkering and making beautiful,
+				functional websites and apps.
+			</p>
+			<p class="mt-2">
+				I work all across the board, across frontend and backend. I’ve used tools like React,
+				Svelte, Tailwind, Next.js, Astro and more.
+			</p>
+		</section>
+		<section class="text-xl leading-snug">
+			<p class="mb-1 text-sm text-stone-600">Hobbies</p>
+			<p>Outside of coding:</p>
+			<ul class="mt-1.5 list-disc space-y-1 pl-6">
+				<li>swimming, and teaching swimming</li>
+				<li>studying</li>
+				<li>reading for pleasure (murder mystery)</li>
+				<li>playing piano and drumkit acceptably</li>
+				<li>sometimes, having fun</li>
+			</ul>
+		</section>
+		<section class="text-xl leading-snug">
+			<p class="mb-1 text-sm text-stone-600">Right now</p>
+			<p>
+				I’m working on infrastructure at <a
+					href="https://youthacks.org"
+					target="_blank"
+					class="underline decoration-1 underline-offset-2 transition hover:text-red-700"
+				>
+					Youthacks
+				</a>.
+			</p>
+		</section>
+	</div>
+</Window>

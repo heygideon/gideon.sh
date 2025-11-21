@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="fixed inset-x-0 bottom-0 flex h-12 border-t border-stone-300/50 bg-white/20 px-6 backdrop-blur-2xl"
+	class="fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-white/20 px-6 backdrop-blur-2xl"
 >
 	<div class="flex-1"></div>
 	<div class="flex items-center">
