@@ -1,6 +1,10 @@
 <script lang="ts">
-	import rocket from '$lib/assets/images/rocket.png';
-	import smile from '$lib/assets/images/smile.png';
+	import {
+		bringWindowToFront,
+		deleteWindow,
+		windowMap,
+		windowState
+	} from '$lib/state/window.svelte';
 	import { ControlFrom, controls, draggable } from '@neodrag/svelte';
 
 	import Minus from 'phosphor-svelte/lib/Minus';
@@ -8,26 +12,37 @@
 	import type { Snippet } from 'svelte';
 
 	interface Props {
+		id: string;
 		width: number;
 		height: number;
 		children?: Snippet;
 	}
-	const { width, height, children }: Props = $props();
+	const { id, width, height, children }: Props = $props();
+
+	const openWindow = $derived(windowState.windows.find((w) => w.id === id)!);
+	const zIndex = $derived(windowState.order.findIndex((wId) => wId === id));
 </script>
 
-<div class="pointer-events-none fixed inset-0 flex items-center justify-center">
+<div
+	style:z-index={zIndex}
+	class="pointer-events-none fixed inset-0 flex items-center justify-center"
+>
 	<div
+		role="presentation"
 		style:width={`${width}px`}
 		style:height={`${height}px`}
 		{@attach draggable([controls({ allow: ControlFrom.selector('[data-drag-handle]') })])}
+		onmousedown={() => {
+			bringWindowToFront(id);
+		}}
 		class="pointer-events-auto flex flex-col overflow-clip rounded-lg border border-stone-300 bg-white shadow-lg transition-shadow nd-dragging:shadow-2xl"
 	>
 		<div
 			class="flex h-8 flex-none border-b border-stone-200 bg-linear-to-r from-orange-50 to-amber-50"
 		>
 			<div data-drag-handle class="flex min-w-0 flex-1 items-center gap-1 px-2.5">
-				<img src={rocket} alt="" class="h-4" />
-				<span class="-mt-0.5 text-sm">Projects</span>
+				<img src={windowMap[openWindow.name].icon} alt="" class="h-4" />
+				<span class="-mt-0.5 text-sm">{windowMap[openWindow.name].title}</span>
 			</div>
 			<button
 				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
@@ -36,6 +51,7 @@
 				<span class="sr-only">Minimise</span>
 			</button>
 			<button
+				onclick={() => deleteWindow(id)}
 				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-red-600 hover:text-white"
 			>
 				<X class="size-4" />
