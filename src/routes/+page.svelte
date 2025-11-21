@@ -75,7 +75,11 @@
 <div class="relative isolate z-10">
 	{#each windowState.windows as window (window.id)}
 		{@const Component = windowMap[window.name].component}
-		<Window id={window.id} width={640} height={480}>
+		<Window
+			id={window.id}
+			width={windowMap[window.name].size.width}
+			height={windowMap[window.name].size.height}
+		>
 			<Component />
 		</Window>
 	{/each}

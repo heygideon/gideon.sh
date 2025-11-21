@@ -23,7 +23,7 @@ export const windowMap: Record<WindowName, WindowMapItem> = {
 		component: Projects,
 		title: 'Projects',
 		icon: rocket,
-		size: { width: 640, height: 480 }
+		size: { width: 800, height: 640 }
 	},
 	about: {
 		component: About,
