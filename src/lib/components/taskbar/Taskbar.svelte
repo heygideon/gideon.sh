@@ -21,7 +21,7 @@
 			<img
 				src={cat}
 				alt="A cute cat"
-				class="size-6 transition group-active:scale-90 group-active:opacity-75"
+				class="size-6 drop-shadow-xs transition group-active:scale-90 group-active:opacity-75"
 			/>
 		</button>
 		{#each windowState.windows as window (window.id)}
@@ -38,7 +38,7 @@
 				<img
 					src={windowMap[window.name].icon}
 					alt={windowMap[window.name].title}
-					class="size-6 transition group-active:scale-90 group-active:opacity-75"
+					class="size-6 drop-shadow-xs transition group-active:scale-90 group-active:opacity-75"
 				/>
 				<div
 					class={[

@@ -7,6 +7,8 @@
 	import Taskbar from '$lib/components/taskbar/Taskbar.svelte';
 	import Window from '$lib/components/window/Window.svelte';
 
+	import ArrowUpRight from 'phosphor-svelte/lib/ArrowUpRight';
+
 	import { windowState, windowMap, openWindow } from '$lib/state/window.svelte';
 
 	import neocats from '$lib/assets/neocat';
@@ -53,7 +55,14 @@
 					}}
 					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 focus:border-stone-300 focus:bg-white/50"
 				>
-					<img src={icon} alt="" class="h-12" />
+					<div class="relative">
+						<img src={icon} alt="" class="h-12 drop-shadow-xs" />
+						<div
+							class="absolute bottom-0 left-0 grid size-3 place-items-center border border-stone-300/50 bg-white"
+						>
+							<ArrowUpRight weight="bold" class="size-2 text-sky-600" />
+						</div>
+					</div>
 					<span class="mt-1 text-sm">{title}</span>
 				</button>
 			{/each}
