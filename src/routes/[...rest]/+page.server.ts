@@ -1,3 +1,4 @@
+import { allProjects } from 'content-collections';
 import type { PageServerLoad } from './$types';
 
 async function getPlaceholderWebring() {
@@ -17,6 +18,19 @@ async function getPlaceholderWebring() {
 
 export const load: PageServerLoad = async () => {
 	const placeholder = await getPlaceholderWebring();
+	const projects = await Promise.all(
+		allProjects
+			.toSorted((a, b) => b.year - a.year || b.month - a.month)
+			.map(async (project) => {
+				const resolvedImage: string = await import(
+					`$lib/assets/projects/${project.image.id}.png`
+				).then((mod) => mod.default);
+				return {
+					...project,
+					image: { ...project.image, src: resolvedImage }
+				};
+			})
+	);
 
-	return { webrings: { placeholder } };
+	return { webrings: { placeholder }, projects };
 };

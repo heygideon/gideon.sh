@@ -21,3 +21,51 @@
 		@apply tracking-tight;
 	}
 }
+
+@utility c-prose {
+	@apply text-xl leading-normal text-stone-700;
+
+	:where(*:not(:first-child)) {
+		margin-top: 0.8em;
+	}
+
+	strong,
+	b,
+	:is(h1, h2, h3, h4, h5, h6) {
+		@apply font-semibold text-stone-900;
+	}
+
+	a {
+		@apply font-medium text-stone-900 underline decoration-1 underline-offset-2 transition hover:text-amber-700;
+	}
+
+	em,
+	i {
+		@apply italic;
+	}
+
+	h1 {
+		@apply hidden;
+	}
+	h2 {
+		@apply text-2xl;
+		margin-top: 1.2em;
+	}
+
+	ul {
+		@apply list-disc pl-6;
+	}
+	ol {
+		@apply list-decimal pl-6;
+	}
+
+	ul,
+	ol {
+		li {
+			@apply pl-2 marker:text-stone-300;
+		}
+		li:not(:first-child) {
+			margin-block: 0.4em;
+		}
+	}
+}

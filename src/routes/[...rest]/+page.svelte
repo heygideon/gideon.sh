@@ -14,7 +14,7 @@
 	import neocats from '$lib/assets/neocat';
 
 	const { data }: { data: PageData } = $props();
-	setContext('pageData', data);
+	setContext('pageData', () => data);
 
 	afterNavigate((navigation) => {
 		if (!navigation.to?.params) return;

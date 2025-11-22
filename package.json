@@ -14,6 +14,9 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@content-collections/core": "^0.12.0",
+		"@content-collections/markdown": "^0.1.4",
+		"@content-collections/vite": "^0.2.7",
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.38.0",
 		"@sveltejs/adapter-auto": "^7.0.0",
@@ -33,7 +36,8 @@
 		"tailwindcss": "^4.1.14",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.46.1",
-		"vite": "^7.1.10"
+		"vite": "^7.1.10",
+		"zod": "^4.1.12"
 	},
 	"packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad",
 	"dependencies": {

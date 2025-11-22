@@ -1,11 +1,12 @@
 <script lang="ts">
 	import FolderOpen from 'phosphor-svelte/lib/FolderOpen';
 	import { getContext } from 'svelte';
-	import type { PageData } from '../../routes/$types';
+	import type { PageData } from '../../routes/[...rest]/$types';
 
-	const { webrings } = getContext<PageData>('pageData');
+	const pageData = getContext<() => PageData>('pageData');
 
-	const total = Object.values(webrings).reduce((acc, items) => acc + items.length, 0);
+	let webrings = $derived(pageData().webrings);
+	const total = $derived(Object.values(webrings).reduce((acc, items) => acc + items.length, 0));
 </script>
 
 <div class="p-6 pb-3">
