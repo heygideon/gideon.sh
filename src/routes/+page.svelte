@@ -1,8 +1,6 @@
 <script lang="ts">
-	import rocket from '$lib/assets/images/rocket.png';
-	import smile from '$lib/assets/images/smile.png';
-	import globe from '$lib/assets/images/globe.png';
-	import message from '$lib/assets/images/message.png';
+	import type { PageData } from './$types';
+	import { setContext } from 'svelte';
 
 	import Taskbar from '$lib/components/taskbar/Taskbar.svelte';
 	import Window from '$lib/components/window/Window.svelte';
@@ -12,7 +10,9 @@
 	import { windowState, windowMap, openWindow } from '$lib/state/window.svelte';
 
 	import neocats from '$lib/assets/neocat';
-	import About from '$lib/views/About.svelte';
+
+	const { data }: { data: PageData } = $props();
+	setContext('pageData', data);
 
 	let catIdx = $state(Math.floor(Math.random() * neocats.length));
 	let neocat = $derived(neocats[catIdx]);
