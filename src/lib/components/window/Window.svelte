@@ -9,7 +9,9 @@
 
 	import Minus from 'phosphor-svelte/lib/Minus';
 	import X from 'phosphor-svelte/lib/X';
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
+	import { circIn, circOut } from 'svelte/easing';
+	import { scale } from 'svelte/transition';
 
 	interface Props {
 		id: string;
@@ -28,13 +30,15 @@
 	class="pointer-events-none fixed inset-0 flex items-center justify-center"
 >
 	<div
+		{@attach draggable([controls({ allow: ControlFrom.selector('[data-drag-handle]') })])}
 		role="presentation"
 		style:width={`${width}px`}
 		style:height={`${height}px`}
-		{@attach draggable([controls({ allow: ControlFrom.selector('[data-drag-handle]') })])}
 		onmousedown={() => {
 			bringWindowToFront(id);
 		}}
+		in:scale={{ duration: 150, easing: circOut, start: 0.9 }}
+		out:scale={{ duration: 100, easing: circIn, start: 0.9 }}
 		class="pointer-events-auto flex flex-col overflow-clip rounded-lg border border-stone-300 bg-white shadow-lg transition-shadow nd-dragging:shadow-2xl"
 	>
 		<div
