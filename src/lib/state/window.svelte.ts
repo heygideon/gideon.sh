@@ -2,15 +2,23 @@ import type { Component } from 'svelte';
 
 import About from '$lib/views/About.svelte';
 import Projects from '$lib/views/Projects.svelte';
+import Guestbook from '$lib/views/Guestbook.svelte';
 import Friends from '$lib/views/Friends.svelte';
 import Contact from '$lib/views/Contact.svelte';
 
 import rocket from '$lib/assets/images/rocket.png';
 import smile from '$lib/assets/images/smile.png';
+import file from '$lib/assets/images/file.png';
 import globe from '$lib/assets/images/globe.png';
 import message from '$lib/assets/images/message.png';
 
-type WindowName = 'about' | 'projects' | 'friends' | 'contact';
+type WindowName = 'about' | 'projects' | 'guestbook' | 'friends' | 'contact';
+
+/*
+  - views.ts
+	- regexparam for routing
+	- afternavigate listener
+ */
 
 interface WindowMapItem {
 	component: Component;
@@ -29,6 +37,12 @@ export const windowMap: Record<WindowName, WindowMapItem> = {
 		component: About,
 		title: 'About',
 		icon: smile,
+		size: { width: 640, height: 480 }
+	},
+	guestbook: {
+		component: Guestbook,
+		title: 'Guestbook',
+		icon: file,
 		size: { width: 640, height: 480 }
 	},
 	friends: {
