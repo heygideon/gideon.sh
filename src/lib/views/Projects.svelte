@@ -1,18 +1,21 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import FolderOpen from 'phosphor-svelte/lib/FolderOpen';
 
 	import youthacks from '$lib/assets/projects/youthacks-cover.png';
 	import blueCoatSchool from '$lib/assets/projects/blue-coat-school-cover.png';
 	import paRaspberryPi from '$lib/assets/projects/pa-raspberry-pi-cover.png';
+	import { page } from '$app/state';
 
-	let expanded = $state(false);
+	let projectId = $derived(page.params.rest!.split('/')[1]);
 </script>
 
-{#if expanded}
+{#if !!projectId}
 	<div class="p-6">
 		<button
 			onclick={() => {
-				expanded = false;
+				goto('/work');
 			}}
 			class="h-7 rounded-sm border border-stone-300 bg-stone-50 px-2.5 text-sm transition hover:border-amber-600 hover:bg-amber-100"
 		>
@@ -61,7 +64,7 @@
 	<div class="grid grid-cols-2 gap-0.5 p-3">
 		<button
 			ondblclick={() => {
-				expanded = true;
+				goto('/work/youthacks');
 			}}
 			class="h-fit rounded-sm border border-transparent p-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 		>
@@ -78,7 +81,7 @@
 		</button>
 		<button
 			ondblclick={() => {
-				expanded = true;
+				goto('/work/pa-raspberry-pi');
 			}}
 			class="h-fit rounded-sm border border-transparent p-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 		>
@@ -94,7 +97,7 @@
 		</button>
 		<button
 			ondblclick={() => {
-				expanded = true;
+				goto('/work/blue-coat-school');
 			}}
 			class="h-fit rounded-sm border border-transparent p-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 		>

@@ -23,7 +23,7 @@
 		if (view && view in views) {
 			const existingWindow = routerState.windows.find((window) => window.view === view);
 			if (existingWindow) {
-				bringWindowToFront(existingWindow.id);
+				bringWindowToFront(existingWindow.id, navigation.to.params.rest);
 			} else {
 				openWindow(view as keyof typeof views, navigation.to.params.rest);
 			}

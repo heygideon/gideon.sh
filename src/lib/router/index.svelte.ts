@@ -40,12 +40,16 @@ export function deleteWindow(id: string) {
 	}
 }
 
-export function bringWindowToFront(id: string) {
+export function bringWindowToFront(id: string, rest?: string) {
 	routerState.order = routerState.order.filter((wId) => wId !== id);
 	routerState.order.push(id);
 
-	const window = routerState.windows.find((w) => w.id === id);
-	if (window && page.params.rest !== window.rest) {
-		goto(resolve('/[...rest]', { rest: window.rest }), {});
+	const idx = routerState.windows.findIndex((w) => w.id === id);
+	if (idx !== -1) {
+		if (rest) {
+			routerState.windows[idx].rest = rest;
+		} else if (page.params.rest !== routerState.windows[idx].rest) {
+			goto(resolve('/[...rest]', { rest: routerState.windows[idx].rest }), {});
+		}
 	}
 }
