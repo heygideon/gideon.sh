@@ -12,31 +12,29 @@ import file from '$lib/assets/images/file.png';
 import globe from '$lib/assets/images/globe.png';
 import message from '$lib/assets/images/message.png';
 
-type WindowName = 'about' | 'projects' | 'guestbook' | 'friends' | 'contact';
-
 /*
   - views.ts
 	- regexparam for routing
 	- afternavigate listener
  */
 
-interface WindowMapItem {
-	component: Component;
+interface View {
 	title: string;
 	icon: string;
+	component: Component;
 	size: { width: number; height: number };
 }
-export const windowMap: Record<WindowName, WindowMapItem> = {
-	projects: {
-		component: Projects,
+export const views = {
+	work: {
 		title: 'Projects',
 		icon: rocket,
+		component: Projects,
 		size: { width: 800, height: 640 }
 	},
 	about: {
-		component: About,
 		title: 'About',
 		icon: smile,
+		component: About,
 		size: { width: 640, height: 480 }
 	},
 	guestbook: {
@@ -46,47 +44,15 @@ export const windowMap: Record<WindowName, WindowMapItem> = {
 		size: { width: 640, height: 480 }
 	},
 	friends: {
-		component: Friends,
 		title: 'Friends',
 		icon: globe,
+		component: Friends,
 		size: { width: 640, height: 480 }
 	},
 	contact: {
-		component: Contact,
 		title: 'Say hi!',
 		icon: message,
+		component: Contact,
 		size: { width: 640, height: 320 }
 	}
-};
-
-interface WindowItem {
-	id: string;
-	name: WindowName;
-	pos: { x: number; y: number };
-	minimised: boolean;
-}
-
-export const windowState = $state({
-	windows: [] as WindowItem[],
-	order: [] as string[]
-});
-
-export function openWindow(name: WindowName) {
-	const id = crypto.randomUUID();
-	windowState.windows.push({
-		id,
-		name,
-		pos: { x: 0, y: 0 },
-		minimised: false
-	});
-	windowState.order.push(id);
-}
-
-export function deleteWindow(id: string) {
-	windowState.windows = windowState.windows.filter((w) => w.id !== id);
-}
-
-export function bringWindowToFront(id: string) {
-	windowState.order = windowState.order.filter((wId) => wId !== id);
-	windowState.order.push(id);
-}
+} satisfies Record<string, View>;

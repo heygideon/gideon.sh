@@ -7,7 +7,8 @@
 
 	import Time from './Time.svelte';
 
-	import { bringWindowToFront, windowMap, windowState } from '$lib/state/window.svelte';
+	import { bringWindowToFront, routerState } from '$lib/router/index.svelte';
+	import { views } from '$lib/router/views';
 </script>
 
 <div
@@ -24,8 +25,8 @@
 				class="size-6 drop-shadow-xs transition group-active:scale-90 group-active:opacity-75"
 			/>
 		</button>
-		{#each windowState.windows as window (window.id)}
-			{@const active = windowState.order[windowState.order.length - 1] === window.id}
+		{#each routerState.windows as window (window.id)}
+			{@const active = routerState.order.at(-1) === window.id}
 			<button
 				onclick={() => bringWindowToFront(window.id)}
 				class={[
@@ -36,8 +37,8 @@
 				]}
 			>
 				<img
-					src={windowMap[window.name].icon}
-					alt={windowMap[window.name].title}
+					src={views[window.view].icon}
+					alt={views[window.view].title}
 					class="size-6 drop-shadow-xs transition group-active:scale-90 group-active:opacity-75"
 				/>
 				<div

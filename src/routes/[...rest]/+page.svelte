@@ -2,17 +2,33 @@
 	import type { PageData } from './$types';
 	import { setContext } from 'svelte';
 
+	import { goto, afterNavigate } from '$app/navigation';
+	import { views } from '$lib/router/views';
+	import { bringWindowToFront, openWindow, routerState } from '$lib/router/index.svelte';
+
 	import Taskbar from '$lib/components/taskbar/Taskbar.svelte';
 	import Window from '$lib/components/window/Window.svelte';
 
 	import ArrowUpRight from 'phosphor-svelte/lib/ArrowUpRight';
 
-	import { windowState, windowMap, openWindow } from '$lib/state/window.svelte';
-
 	import neocats from '$lib/assets/neocat';
 
 	const { data }: { data: PageData } = $props();
 	setContext('pageData', data);
+
+	afterNavigate((navigation) => {
+		if (!navigation.to?.params) return;
+
+		const view = navigation.to.params.rest!.split('/')[0];
+		if (view && view in views) {
+			const existingWindow = routerState.windows.find((window) => window.view === view);
+			if (existingWindow) {
+				bringWindowToFront(existingWindow.id);
+			} else {
+				openWindow(view as keyof typeof views, navigation.to.params.rest);
+			}
+		}
+	});
 
 	let catIdx = $state(Math.floor(Math.random() * neocats.length));
 	let neocat = $derived(neocats[catIdx]);
@@ -48,11 +64,9 @@
 			</button>
 		</div>
 		<div class="mt-6 flex gap-4">
-			{#each Object.entries(windowMap) as [name, { icon, title }]}
+			{#each Object.entries(views) as [key, { icon, title }]}
 				<button
-					ondblclick={() => {
-						openWindow(name as keyof typeof windowMap);
-					}}
+					ondblclick={() => goto(`/${key}`)}
 					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 focus:border-stone-300 focus:bg-white/50"
 				>
 					<div class="relative">
@@ -73,12 +87,12 @@
 <Taskbar />
 
 <div class="relative isolate z-10">
-	{#each windowState.windows as window (window.id)}
-		{@const Component = windowMap[window.name].component}
+	{#each routerState.windows as window (window.id)}
+		{@const Component = views[window.view].component}
 		<Window
 			id={window.id}
-			width={windowMap[window.name].size.width}
-			height={windowMap[window.name].size.height}
+			width={views[window.view].size.width}
+			height={views[window.view].size.height}
 		>
 			<Component />
 		</Window>

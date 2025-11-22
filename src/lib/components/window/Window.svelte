@@ -1,10 +1,6 @@
 <script lang="ts">
-	import {
-		bringWindowToFront,
-		deleteWindow,
-		windowMap,
-		windowState
-	} from '$lib/state/window.svelte';
+	import { bringWindowToFront, deleteWindow, routerState } from '$lib/router/index.svelte';
+	import { views } from '$lib/router/views';
 	import { ControlFrom, controls, draggable } from '@neodrag/svelte';
 
 	import Minus from 'phosphor-svelte/lib/Minus';
@@ -21,8 +17,8 @@
 	}
 	const { id, width, height, children }: Props = $props();
 
-	const openWindow = $derived(windowState.windows.find((w) => w.id === id)!);
-	const zIndex = $derived(windowState.order.findIndex((wId) => wId === id));
+	const openWindow = $derived(routerState.windows.find((w) => w.id === id)!);
+	const zIndex = $derived(routerState.order.findIndex((wId) => wId === id));
 </script>
 
 <div
@@ -34,7 +30,9 @@
 		role="presentation"
 		style:width={`${width}px`}
 		style:height={`${height}px`}
-		onmousedown={() => {
+		onmousedown={(ev) => {
+			// ignore back/forward buttons
+			if (ev.button >= 3) return;
 			bringWindowToFront(id);
 		}}
 		in:scale={{ duration: 150, easing: circOut, start: 0.9 }}
@@ -45,8 +43,8 @@
 			class="flex h-8 flex-none border-b border-stone-200 bg-linear-to-r from-orange-50 to-amber-50"
 		>
 			<div data-drag-handle class="flex min-w-0 flex-1 items-center gap-1 px-2.5">
-				<img src={windowMap[openWindow.name].icon} alt="" class="h-4" />
-				<span class="-mt-0.5 text-sm">{windowMap[openWindow.name].title}</span>
+				<img src={views[openWindow.view].icon} alt="" class="h-4" />
+				<span class="-mt-0.5 text-sm">{views[openWindow.view].title}</span>
 			</div>
 			<button
 				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
