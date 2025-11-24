@@ -2,15 +2,15 @@ import type { Component } from 'svelte';
 
 import About from '$lib/views/About.svelte';
 import Projects from '$lib/views/Projects.svelte';
-import Guestbook from '$lib/views/Guestbook.svelte';
 import Friends from '$lib/views/Friends.svelte';
 import Contact from '$lib/views/Contact.svelte';
 
 import rocket from '$lib/assets/images/rocket.png';
 import smile from '$lib/assets/images/smile.png';
-import file from '$lib/assets/images/file.png';
+import drum from '$lib/assets/images/drum.png';
 import globe from '$lib/assets/images/globe.png';
 import message from '$lib/assets/images/message.png';
+import DrumMachine from '$lib/views/DrumMachine.svelte';
 
 /*
   - views.ts
@@ -37,11 +37,11 @@ export const views = {
 		component: About,
 		size: { width: 640, height: 480 }
 	},
-	guestbook: {
-		component: Guestbook,
-		title: 'Guestbook',
-		icon: file,
-		size: { width: 640, height: 480 }
+	drum: {
+		component: DrumMachine,
+		title: 'Fun',
+		icon: drum,
+		size: { width: 800, height: 640 }
 	},
 	friends: {
 		title: 'Friends',

@@ -24,3 +24,6 @@ vite.config.ts.timestamp-*
 
 # Content Collections
 /.content-collections
+
+# notes!
+NOTES.md

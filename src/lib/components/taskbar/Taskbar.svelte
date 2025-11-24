@@ -12,7 +12,7 @@
 </script>
 
 <div
-	class="fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-white/20 px-6 backdrop-blur-2xl"
+	class="fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-linear-to-r from-orange-50/80 to-amber-50/80 px-6 backdrop-blur-2xl"
 >
 	<div class="flex-1"></div>
 	<div class="flex items-center gap-0.5">
@@ -30,7 +30,7 @@
 			<button
 				onclick={() => bringWindowToFront(window.id)}
 				class={[
-					'group relative grid size-10 place-items-center rounded-sm border  transition',
+					'group relative grid size-10 place-items-center rounded-sm border transition',
 					active
 						? 'border-stone-300/50 bg-white/50'
 						: 'border-transparent hover:border-stone-300/50 hover:bg-white/50'

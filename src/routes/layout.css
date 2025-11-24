@@ -1,7 +1,16 @@
 @import 'tailwindcss';
 
+@font-face {
+	font-family: 'Departure Mono';
+	src: url('$lib/assets/fonts/DepartureMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	--font-serif: 'Crimson Pro Variable', serif;
+	--font-pxl: 'Departure Mono', monospace;
 	--default-font-family: var(--font-serif);
 }
 
@@ -68,4 +77,25 @@
 			margin-block: 0.4em;
 		}
 	}
+}
+
+@utility bg-drum-back {
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 3px,
+		--alpha(var(--color-stone-800) / 0.2) 3px,
+		--alpha(var(--color-stone-800) / 0.2) 4px
+	);
+}
+
+@utility bg-drum-volume {
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 3px,
+		var(--color-amber-400) 3px,
+		var(--color-amber-400) 4px
+	);
+	background-position: bottom;
 }
