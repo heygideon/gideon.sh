@@ -32,7 +32,7 @@
 	};
 </script>
 
-<div class="bg-drum-back flex size-full flex-col bg-stone-900 font-pxl text-white shadow-inner">
+<div class="flex size-full flex-col bg-stone-900 bg-drum-back font-pxl text-white shadow-inner">
 	<div class="p-6">
 		<p class="flex justify-between text-3xl text-stone-700">
 			<span class="text-amber-300">drum machine 3000</span>
@@ -112,14 +112,38 @@
 					<option value={key}>{kit.name}</option>
 				{/each}
 			</select>
-			<input
-				type="range"
-				min="0"
-				max="1"
-				step="0.01"
-				bind:value={drumState.swing}
-				class="h-10 w-32 cursor-pointer accent-amber-500"
-			/>
+			<div class="w-32">
+				<p class="flex justify-between text-xs text-stone-600">
+					<span>volume</span>
+					<span>
+						{drumState.volume}db
+					</span>
+				</p>
+				<input
+					type="range"
+					min="-24"
+					max="4"
+					step="1"
+					bind:value={drumState.volume}
+					class="h-6 w-full cursor-pointer accent-amber-500"
+				/>
+			</div>
+			<div class="w-32">
+				<p class="flex justify-between text-xs text-stone-600">
+					<span>swing</span>
+					<span>
+						{drumState.swing}
+					</span>
+				</p>
+				<input
+					type="range"
+					min="0"
+					max="1"
+					step="0.1"
+					bind:value={drumState.swing}
+					class="h-6 w-full cursor-pointer accent-amber-500"
+				/>
+			</div>
 		</div>
 	</div>
 	<div class="flex flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1">

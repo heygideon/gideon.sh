@@ -12,6 +12,7 @@ export interface DrumState {
 	lines: Record<LineNumber, SampleState>;
 	kit: keyof typeof kits;
 	tempo: number;
+	volume: number;
 	swing: number;
 
 	playing: boolean;
@@ -32,6 +33,7 @@ export const initialState: DrumState = {
 	},
 	kit: 'std',
 	tempo: 120,
+	volume: 0,
 	swing: 0,
 
 	playing: false,

@@ -13,11 +13,12 @@ function addIfNotExists(players: Tone.Players, name: string, url: string) {
 export default function useDrumMachine() {
 	let samples: Tone.Players;
 	let loop: Tone.Sequence;
+	let fft: Tone.FFT;
 
 	const state = $state<DrumState>(initialState);
 
 	onMount(() => {
-		const fft = new Tone.FFT(32);
+		fft = new Tone.FFT(32);
 
 		samples = new Tone.Players().fan(fft).toDestination();
 		Tone.getTransport().start();
@@ -74,6 +75,11 @@ export default function useDrumMachine() {
 		transport.swingSubdivision = '16n';
 	});
 
+	$effect(() => {
+		// Update volume
+		Tone.getDestination().volume.value = state.volume;
+	});
+
 	const start = async () => {
 		await Tone.start();
 		loop.start();
@@ -82,6 +88,7 @@ export default function useDrumMachine() {
 	const stop = () => {
 		loop.stop();
 		state.playing = false;
+		state.activeBeat = null;
 	};
 
 	return {
