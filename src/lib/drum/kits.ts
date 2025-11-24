@@ -92,14 +92,14 @@ export const eightiesKit = {
 export const houseKit = {
 	name: 'House',
 	lines: {
-		0: { name: 'tom-2', url: '/samples/standard/tom2.wav' },
-		1: { name: 'tom', url: '/samples/standard/tom.wav' },
-		2: { name: 'open-hi', url: '/samples/standard/ohat.wav' },
-		3: { name: 'closed-hi', url: '/samples/standard/hat.wav' },
-		4: { name: 'clap', url: '/samples/standard/clap.wav' },
-		5: { name: 'snare', url: '/samples/standard/snare.wav' },
-		6: { name: 'kick-2', url: '/samples/standard/kick2.wav' },
-		7: { name: 'kick', url: '/samples/standard/kick.wav' }
+		0: { name: 'chord-E', url: '/samples/house/paris_p_E.wav' },
+		1: { name: 'chord-Abm', url: '/samples/house/paris_p_Abm.wav' },
+		2: { name: 'open-hi', url: '/samples/house/paris_ohat.wav' },
+		3: { name: 'closed-hi', url: '/samples/house/paris_hat.wav' },
+		4: { name: 'clap', url: '/samples/house/paris_clap.wav' },
+		5: { name: 'snare', url: '/samples/house/paris_snare.wav' },
+		6: { name: 'bass', url: '/samples/house/paris_bass.wav' },
+		7: { name: 'kick', url: '/samples/house/paris_kick.wav' }
 	}
 } satisfies Kit;
 
