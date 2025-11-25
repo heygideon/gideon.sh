@@ -67,7 +67,7 @@
 			{#each Object.entries(views) as [key, { icon, title }]}
 				<button
 					ondblclick={() => goto(`/${key}`)}
-					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 focus:border-stone-300 focus:bg-white/50"
+					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50"
 				>
 					<div class="relative">
 						<img src={icon} alt="" class="h-12 drop-shadow-xs" />

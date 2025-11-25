@@ -5,8 +5,7 @@
 
 	import favicon from '$lib/assets/favicon.svg';
 
-	import background from '$lib/assets/images/bg.svg';
-	import noise from '$lib/assets/images/noise.png';
+	import Background from '$lib/components/desktop/Background.svelte';
 
 	let { children } = $props();
 </script>
@@ -16,6 +15,7 @@
 </svelte:head>
 
 <div class="bg fixed inset-0 -z-10 size-full"></div>
+<Background />
 
 {@render children()}
 
