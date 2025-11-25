@@ -25,8 +25,17 @@
 	const pageData = getContext<() => PageData>('pageData');
 	let projects = $derived(pageData().projects);
 
-	let projectSlug = $derived(page.params.rest!.split('/')[1]);
+	let projectSlug = $state('');
 	let project = $derived(projects.find((p) => p.slug === projectSlug));
+	$effect(() => {
+		const parts = page.params.rest?.split('/');
+		if (!parts || parts[0] !== 'work') return;
+		if (parts.length > 1) {
+			projectSlug = parts[1];
+		} else {
+			projectSlug = '';
+		}
+	});
 </script>
 
 {#if !!project}
