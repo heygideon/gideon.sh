@@ -32,11 +32,13 @@
 	};
 </script>
 
-<div class="size-full bg-stone-900 bg-drum-back font-pxl text-white shadow-inner">
+<div class="size-full bg-stone-900 bg-drum-back font-pxl text-white inset-shadow-sm">
 	<div class="flex size-full animate-load-in flex-col">
 		<div class="p-6">
 			<p class="flex justify-between text-3xl text-stone-700">
-				<span class="text-amber-300">drum machine 3000</span>
+				<span class="bg-linear-to-b from-amber-300 to-amber-400 bg-clip-text text-transparent"
+					>drum machine 3000</span
+				>
 				<span>&gt;&gt;</span>
 				<span>drum hit make sound!</span>
 			</p>
@@ -147,7 +149,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1">
+		<div
+			class="flex flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1 inset-shadow-sm"
+		>
 			{#each drumState.fft as value, index (index)}
 				<div
 					class="inline-block h-full min-w-0 flex-1 bg-drum-volume"
@@ -199,7 +203,7 @@
 								onclick={() => {
 									drumState.lines[key].beats[index] = !drumState.lines[key].beats[index];
 								}}
-								class="size-8 rounded-sm border border-stone-700 p-0.5 shadow-inner transition hover:border-stone-500 hover:bg-stone-700"
+								class="size-8 rounded-sm border border-stone-700 p-0.5 inset-shadow-sm transition hover:border-stone-500 hover:bg-stone-700"
 							>
 								<span class="sr-only">
 									Toggle {line.name} on beat {index + 1}
