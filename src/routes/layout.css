@@ -103,3 +103,15 @@
 	);
 	background-position: bottom;
 }
+
+@utility animate-load-in {
+	animation: load-in 0.3s steps(16) 0.1s both;
+}
+@keyframes load-in {
+	from {
+		clip-path: inset(0 0 100% 0);
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}
