@@ -60,12 +60,22 @@
 				<img src={views[openWindow.view].icon} alt="" class="h-4" />
 				<span class="-mt-0.5 text-sm">{views[openWindow.view].title}</span>
 			</div>
-			<button
-				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
-			>
-				<Minus class="size-4" />
-				<span class="sr-only">Minimise</span>
-			</button>
+			<div class="relative">
+				<button
+					class="peer grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
+				>
+					<Minus class="size-4" />
+					<span class="sr-only">Minimise</span>
+				</button>
+				<div
+					class="pointer-events-none absolute top-full right-0 -mt-0.5 w-max rounded-sm border border-stone-200 bg-white px-1.5 shadow-xs transition not-peer-focus:-translate-y-0.5 not-peer-focus:opacity-0"
+				>
+					<div
+						class="absolute top-0 right-5 size-2 -translate-y-1/2 rotate-45 border-t border-l border-stone-200 bg-white"
+					></div>
+					<span class="text-sm leading-snug">coming soon™</span>
+				</div>
+			</div>
 			<button
 				onclick={() => deleteWindow(id)}
 				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-red-600 hover:text-white"
