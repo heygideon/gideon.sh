@@ -77,6 +77,10 @@
 			margin-block: 0.4em;
 		}
 	}
+
+	hr {
+		@apply my-6 border-stone-300;
+	}
 }
 
 @utility bg-drum-back {

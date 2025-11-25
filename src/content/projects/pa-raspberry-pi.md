@@ -27,9 +27,8 @@ Compared to sending pick-up QR codes:
 
 I was responsible for the software - that's the mobile app, web app, and database to store orders and locker codes. My teammates built the locker itself using a Raspberry Pi, relays and solenoid locks, plus the Bluetooth server to communicate with the app.
 
-## Result
+---
 
-- We won the Y10-11 Innovation Award on the day, which was pretty cool!
-- It was amazing to see people showing genuine interest in what we'd made
+We won the Y10-11 Innovation Award on the day, which was pretty cool! It was also amazing to see people showing genuine interest in what we'd made.
 
 The code is open-source [here](https://github.com/heygideon/rpi-prescription).

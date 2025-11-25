@@ -19,7 +19,6 @@ Students and teachers could quickly and easily log in using their school email a
 Everyone could view leaderboards, broken down by whole school and year group, to encourage _friendly_ competition,
 and teachers running the event could add events and enter scores, with 100% less Excel.
 
-## Result
+---
 
-- Over 120 students and teachers signed up in the first day
-- Leaderboards were used in closing assemblies to announce winners
+Over 120 students and teachers signed up in the first day, and I got really positive feedback! My leaderboards were used in closing assemblies to announce winners.
