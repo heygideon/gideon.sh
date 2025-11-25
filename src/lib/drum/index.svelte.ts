@@ -25,20 +25,34 @@ export default function useDrumMachine() {
 
 		loop = new Tone.Sequence(
 			function (time, col) {
+				const kit = state.kit;
 				const hasSolo = Object.values(state.lines).some((line) => line.solo);
+
 				for (let lineIdx = 0; lineIdx < 8; lineIdx++) {
 					const line = state.lines[lineIdx as LineNumber];
 					const isActive = line.beats[col];
 
+					const instrument = kits[kit].lines[lineIdx as LineNumber];
+
 					if (hasSolo && !line.solo) continue;
 					if (!hasSolo && line.muted) continue;
+					if (!isActive) continue;
 
-					if (isActive) {
-						const kit = state.kit;
-						const sampleId = `${kit}-${lineIdx}`;
-
-						samples.player(sampleId).start(time, 0);
+					if (instrument.is === 'hat') {
+						const ohatIndex = Object.entries(kits[kit].lines).findIndex(
+							([, data]) => data.is === 'ohat'
+						);
+						if (ohatIndex !== -1) {
+							const ohatLine = state.lines[ohatIndex as LineNumber];
+							if (!ohatLine.beats[col]) {
+								const closeSampleId = `${kit}-${ohatIndex}`;
+								samples.player(closeSampleId).stop(time);
+							}
+						}
 					}
+
+					const sampleId = `${kit}-${lineIdx}`;
+					samples.player(sampleId).start(time, 0);
 				}
 
 				Tone.getDraw().schedule(function () {
