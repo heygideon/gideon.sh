@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { bringWindowToFront, deleteWindow, routerState } from '$lib/router/index.svelte';
+	import {
+		bringWindowToFront,
+		deleteWindow,
+		routerState,
+		setWindowPosition
+	} from '$lib/router/index.svelte';
 	import { views } from '$lib/router/views';
-	import { ControlFrom, controls, draggable } from '@neodrag/svelte';
+	import { ControlFrom, controls, draggable, events, position } from '@neodrag/svelte';
 
 	import Minus from 'phosphor-svelte/lib/Minus';
 	import X from 'phosphor-svelte/lib/X';
@@ -26,7 +31,16 @@
 	class="pointer-events-none fixed inset-0 flex items-center justify-center"
 >
 	<div
-		{@attach draggable([controls({ allow: ControlFrom.selector('[data-drag-handle]') })])}
+		{@attach draggable([
+			controls({ allow: ControlFrom.selector('[data-drag-handle]') }),
+			position({ current: openWindow.pos }),
+			events({
+				onDragEnd: (data) => {
+					setWindowPosition(id, data.offset);
+				}
+			})
+		])}
+		id={`window-${id}`}
 		role="presentation"
 		style:width={`${width}px`}
 		style:height={`${height}px`}

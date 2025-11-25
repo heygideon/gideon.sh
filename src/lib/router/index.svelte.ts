@@ -45,11 +45,32 @@ export function bringWindowToFront(id: string, rest?: string) {
 	routerState.order.push(id);
 
 	const idx = routerState.windows.findIndex((w) => w.id === id);
+	if (idx === -1) return;
+
+	if (rest) {
+		routerState.windows[idx].rest = rest;
+	} else if (page.params.rest !== routerState.windows[idx].rest) {
+		goto(resolve('/[...rest]', { rest: routerState.windows[idx].rest }), {});
+	}
+
+	const el = document.getElementById(`window-${id}`);
+	if (el) {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (!entry.isIntersecting) {
+					routerState.windows[idx].pos = { x: 0, y: 0 };
+				}
+				observer.disconnect();
+			},
+			{ threshold: 0, rootMargin: '0px 0px -48px 0px' }
+		);
+		observer.observe(el);
+	}
+}
+
+export function setWindowPosition(id: string, pos: { x: number; y: number }) {
+	const idx = routerState.windows.findIndex((w) => w.id === id);
 	if (idx !== -1) {
-		if (rest) {
-			routerState.windows[idx].rest = rest;
-		} else if (page.params.rest !== routerState.windows[idx].rest) {
-			goto(resolve('/[...rest]', { rest: routerState.windows[idx].rest }), {});
-		}
+		routerState.windows[idx].pos = pos;
 	}
 }
