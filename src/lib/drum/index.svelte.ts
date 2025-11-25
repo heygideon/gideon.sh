@@ -46,7 +46,10 @@ export default function useDrumMachine() {
 							const ohatLine = state.lines[ohatIndex as LineNumber];
 							if (!ohatLine.beats[col]) {
 								const closeSampleId = `${kit}-${ohatIndex}`;
-								if (samples.has(closeSampleId)) {
+								if (
+									samples.has(closeSampleId) &&
+									samples.player(closeSampleId).state === 'started'
+								) {
 									samples.player(closeSampleId).stop(time);
 								}
 							}
@@ -111,6 +114,7 @@ export default function useDrumMachine() {
 	};
 	const stop = () => {
 		loop.stop();
+		samples.stopAll();
 		state.playing = false;
 		state.activeBeat = null;
 	};
