@@ -185,7 +185,12 @@
 			</div>
 		</div>
 		{#each entriesOf(kits[drumState.kit].lines) as [key, line]}
-			<div class="flex items-center">
+			<div
+				class={[
+					'flex items-center',
+					(hasSolo ? !drumState.lines[key].solo : drumState.lines[key].muted) && 'opacity-50'
+				]}
+			>
 				<p class="mr-3 min-w-0 flex-1 text-right text-xs">{line.name}</p>
 				<div class="flex flex-none gap-1.5">
 					{#each { length: 16 } as _, index}
@@ -219,7 +224,7 @@
 							hasSolo
 								? 'border-stone-600 opacity-50'
 								: drumState.lines[key].muted
-									? 'border-amber-600 bg-amber-600'
+									? 'border-amber-600 bg-amber-600 hover:border-amber-700 hover:bg-amber-700'
 									: 'border-stone-600 bg-stone-800 hover:border-amber-600 hover:bg-amber-800'
 						]}
 						title="Mute"
