@@ -46,13 +46,17 @@ export default function useDrumMachine() {
 							const ohatLine = state.lines[ohatIndex as LineNumber];
 							if (!ohatLine.beats[col]) {
 								const closeSampleId = `${kit}-${ohatIndex}`;
-								samples.player(closeSampleId).stop(time);
+								if (samples.has(closeSampleId)) {
+									samples.player(closeSampleId).stop(time);
+								}
 							}
 						}
 					}
 
 					const sampleId = `${kit}-${lineIdx}`;
-					samples.player(sampleId).start(time, 0);
+					if (samples.has(sampleId)) {
+						samples.player(sampleId).start(time, 0);
+					}
 				}
 
 				Tone.getDraw().schedule(function () {
