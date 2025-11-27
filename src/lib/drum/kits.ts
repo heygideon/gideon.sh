@@ -21,20 +21,6 @@ export const stdKit: Kit = {
 	}
 };
 
-export const organicKit: Kit = {
-	name: 'Organic',
-	lines: {
-		0: { name: 'chime', url: '/samples/organic/dk_chime.wav' },
-		1: { name: 'rim', url: '/samples/organic/dk_sidestick.wav' },
-		2: { name: 'stick', url: '/samples/organic/dk_stick_click.wav' },
-		3: { name: 'closed-hi', url: '/samples/organic/dk_shaker.wav' },
-		4: { name: 'clap', url: '/samples/organic/dk_clap.wav' },
-		5: { name: 'snare', url: '/samples/organic/dk_snare.wav' },
-		6: { name: 'kick-2', url: '/samples/organic/dk_kick2.wav' },
-		7: { name: 'kick', url: '/samples/organic/dk_kick.wav' }
-	}
-};
-
 export const funkKit: Kit = {
 	name: 'Funk',
 	lines: {
@@ -67,7 +53,7 @@ export const trapKit: Kit = {
 	name: 'Trap',
 	lines: {
 		0: { name: 'hat-3', url: '/samples/trap/ts_hat3.wav' },
-		1: { name: 'hat-2', url: '/samples/trap/ts_hat3.wav' },
+		1: { name: 'hat-2', url: '/samples/trap/ts_hat2.wav' },
 		2: { name: 'open-hi', url: '/samples/trap/ts_ohat.wav', is: 'ohat' },
 		3: { name: 'closed-hi', url: '/samples/trap/ts_hat.wav', is: 'hat' },
 		4: { name: 'clap', url: '/samples/trap/ts_clap.wav' },
@@ -99,8 +85,8 @@ export const houseKit: Kit = {
 		2: { name: 'open-hi', url: '/samples/house/paris_ohat.wav', is: 'ohat' },
 		3: { name: 'closed-hi', url: '/samples/house/paris_hat.wav', is: 'hat' },
 		4: { name: 'clap', url: '/samples/house/paris_clap.wav' },
-		5: { name: 'snare', url: '/samples/house/paris_snare.wav' },
-		6: { name: 'bass', url: '/samples/house/paris_bass.wav' },
+		5: { name: 'snare', url: '/samples/house/snare.wav' },
+		6: { name: 'tom', url: '/samples/house/low-tom.wav' },
 		7: { name: 'kick', url: '/samples/house/paris_kick.wav' }
 	}
 };
@@ -124,7 +110,7 @@ export const indieKit: Kit = {
 	lines: {
 		0: { name: 'crash', url: '/samples/indie/crash_legend.wav' },
 		1: { name: 'perc', url: '/samples/indie/perc_jungle.wav' },
-		2: { name: 'open-hi', url: '/samples/indie/ohat_thick.wav' },
+		2: { name: 'open-hi', url: '/samples/indie/ohat_thick.wav', is: 'ohat' },
 		3: { name: 'closed-hi', url: '/samples/indie/hat_crisp.wav', is: 'hat' },
 		4: { name: 'clap', url: '/samples/indie/clap_hectic.wav' },
 		5: { name: 'snare', url: '/samples/indie/snare_together.wav' },
@@ -147,9 +133,36 @@ export const jungleKit: Kit = {
 	}
 };
 
+export const houseNewKit: Kit = {
+	name: 'House (new)',
+	lines: {
+		0: { name: 'crash', url: '/samples/new/house/crash.wav' },
+		1: { name: 'ride', url: '/samples/new/house/ride.wav' },
+		2: { name: 'open-hi', url: '/samples/new/house/ohat.wav', is: 'ohat' },
+		3: { name: 'closed-hi', url: '/samples/new/house/hat.wav', is: 'hat' },
+		4: { name: 'tom', url: '/samples/new/house/low-tom.wav' },
+		5: { name: 'clap', url: '/samples/new/house/clap.wav' },
+		6: { name: 'snare', url: '/samples/new/house/snare.wav' },
+		7: { name: 'kick', url: '/samples/new/house/kick.wav' }
+	}
+};
+
+export const lofiKit: Kit = {
+	name: 'Lo-fi',
+	lines: {
+		0: { name: 'perc', url: '/samples/lo-fi/perc.wav' },
+		1: { name: 'shaker', url: '/samples/lo-fi/shaker.wav' },
+		2: { name: 'open-hi', url: '/samples/lo-fi/ohat.wav', is: 'ohat' },
+		3: { name: 'closed-hi', url: '/samples/lo-fi/hat.wav', is: 'hat' },
+		4: { name: 'snap', url: '/samples/lo-fi/snap.wav' },
+		5: { name: 'rim', url: '/samples/lo-fi/rim.wav' },
+		6: { name: 'snare', url: '/samples/lo-fi/snare.wav' },
+		7: { name: 'kick', url: '/samples/lo-fi/kick.wav' }
+	}
+};
+
 export const kits = {
 	std: stdKit,
-	organic: organicKit,
 	funk: funkKit,
 	blues: bluesKit,
 	trap: trapKit,
@@ -157,7 +170,6 @@ export const kits = {
 	house: houseKit,
 	techno: technoKit,
 	indie: indieKit,
-	jungle: jungleKit
+	jungle: jungleKit,
+	lofi: lofiKit
 } satisfies Record<string, Kit>;
-
-console.log(kits);

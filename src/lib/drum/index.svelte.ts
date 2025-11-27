@@ -38,27 +38,30 @@ export default function useDrumMachine() {
 					if (!hasSolo && line.muted) continue;
 					if (!isActive) continue;
 
-					if (instrument.is === 'hat') {
-						const ohatIndex = Object.entries(kits[kit].lines).findIndex(
-							([, data]) => data.is === 'ohat'
-						);
-						if (ohatIndex !== -1) {
-							const ohatLine = state.lines[ohatIndex as LineNumber];
-							if (!ohatLine.beats[col]) {
-								const closeSampleId = `${kit}-${ohatIndex}`;
-								if (
-									samples.has(closeSampleId) &&
-									samples.player(closeSampleId).state === 'started'
-								) {
-									samples.player(closeSampleId).stop(time);
+					try {
+						if (instrument.is === 'hat') {
+							const ohatIndex = Object.entries(kits[kit].lines).findIndex(
+								([, data]) => data.is === 'ohat'
+							);
+							if (ohatIndex !== -1) {
+								const ohatLine = state.lines[ohatIndex as LineNumber];
+								if (!ohatLine.beats[col]) {
+									const closeSampleId = `${kit}-${ohatIndex}`;
+									if (samples.player(closeSampleId).state === 'started') {
+										samples.player(closeSampleId).stop(time);
+									}
 								}
 							}
 						}
+					} catch (e) {
+						console.warn('close hat:', e);
 					}
 
 					const sampleId = `${kit}-${lineIdx}`;
-					if (samples.has(sampleId)) {
+					try {
 						samples.player(sampleId).start(time, 0);
+					} catch (e) {
+						console.warn(`${sampleId}:`, e);
 					}
 				}
 
@@ -74,7 +77,7 @@ export default function useDrumMachine() {
 		const updateFFT = () => {
 			if (fftController.signal.aborted) return;
 			state.fft = Array.from(fft.getValue()).map((v) => (v + 140) / 140);
-			requestAnimationFrame(updateFFT);
+			// requestAnimationFrame(updateFFT);
 		};
 		updateFFT();
 

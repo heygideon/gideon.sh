@@ -13,10 +13,6 @@
 
 	const hasSolo = $derived(Object.values(drumState.lines).some((s) => s.solo));
 
-	$effect(() => {
-		console.log(drumState.kit);
-	});
-
 	let tempTempo = $state<string | null>(null);
 	const finaliseTempo = () => {
 		if (!tempTempo) return;
