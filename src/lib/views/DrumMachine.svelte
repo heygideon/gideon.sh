@@ -105,7 +105,7 @@
 				</div>
 				<select
 					bind:value={drumState.kit}
-					class="h-10 rounded-sm border border-stone-700 bg-stone-900 px-3 text-sm hover:bg-stone-800"
+					class="h-10 rounded-sm border border-stone-700 bg-stone-900 px-3 text-sm hover:bg-stone-800 focus:bg-stone-800"
 				>
 					{#each Object.entries(kits) as [key, kit]}
 						<option value={key}>{kit.name}</option>
