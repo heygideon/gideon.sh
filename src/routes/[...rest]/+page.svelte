@@ -12,6 +12,7 @@
 	import ArrowUpRight from 'phosphor-svelte/lib/ArrowUpRight';
 
 	import neocats from '$lib/assets/neocat';
+	import Presence from '$lib/components/desktop/Presence.svelte';
 
 	const { data }: { data: PageData } = $props();
 	setContext('pageData', () => data);
@@ -34,18 +35,7 @@
 	let neocat = $derived(neocats[catIdx]);
 </script>
 
-<div class="pointer-events-none fixed inset-x-0 top-0 flex items-center justify-center gap-1.5 p-4">
-	<div class="flex items-center gap-1">
-		<span
-			role="img"
-			aria-label="Presence"
-			class="mt-0.5 inline-block size-2.5 rounded-full bg-radial from-emerald-500 to-emerald-600"
-		></span>
-		<span class="text-sm font-medium text-emerald-700">online</span>
-	</div>
-	<span class="text-sm text-stone-600">/</span>
-	<span class="text-sm text-stone-600">United Kingdom</span>
-</div>
+<Presence />
 
 <div class="flex size-full flex-col items-center justify-center">
 	<div>
