@@ -1,13 +1,23 @@
 <script lang="ts">
 	import aww from '$lib/assets/neocat/aww.png';
+	import { onMount } from 'svelte';
+
+	let content: HTMLDivElement;
+	let wordCount = $state(0);
+
+	onMount(() => {
+		const text = content.innerText;
+		const words = text.trim().split(/\s+/);
+		wordCount = words.length;
+	});
 </script>
 
-<div class="space-y-6 p-6">
+<div bind:this={content} class="space-y-6 p-6">
 	<section class="text-2xl">
 		<img src={aww} alt="" class="h-12" />
 		<p class="mt-2">
-			<span class="font-semibold">Heya, I’m Gideon!</span> I enjoy tinkering and making beautiful, functional
-			websites and apps.
+			<span class="font-semibold">Heya, I’m Gideon!</span> I enjoy exploring and making beautiful, functional
+			websites and apps - especially ones that make people's lives a little more joyful.
 		</p>
 		<p class="mt-2">
 			I work all across the board, across frontend and backend. I’ve used tools like React, Svelte,
@@ -41,4 +51,16 @@
 			</p>
 		</div>
 	</section>
+</div>
+
+<div
+	class="sticky -bottom-px flex h-7 items-center justify-end border-t border-stone-200 bg-stone-50 px-6 text-xs text-stone-600"
+>
+	<span class="w-20">
+		{wordCount} words
+	</span>
+	<div class="min-w-0 flex-1 border-l border-stone-200 pl-2 leading-snug">Plain text</div>
+	<div class="w-14 border-l border-stone-200 pl-2 leading-snug">100%</div>
+	<div class="w-32 border-l border-stone-200 pl-2 leading-snug">Windows (CRLF)</div>
+	<div class="w-32 border-l border-stone-200 pl-2 leading-snug">UTF-8</div>
 </div>
