@@ -19,9 +19,7 @@ export default function useDrumMachine() {
 
 	onMount(() => {
 		fft = new Tone.FFT(32);
-
 		samples = new Tone.Players().fan(fft).toDestination();
-		Tone.getTransport().start();
 
 		loop = new Tone.Sequence(
 			function (time, col) {
@@ -66,6 +64,7 @@ export default function useDrumMachine() {
 				}
 
 				Tone.getDraw().schedule(function () {
+					if (!state.playing) return;
 					state.activeBeat = col;
 				}, time);
 			},
@@ -77,24 +76,21 @@ export default function useDrumMachine() {
 		const updateFFT = () => {
 			if (fftController.signal.aborted) return;
 			state.fft = Array.from(fft.getValue()).map((v) => (v + 140) / 140);
-			// requestAnimationFrame(updateFFT);
+			requestAnimationFrame(updateFFT);
 		};
 		updateFFT();
 
 		return () => {
 			fftController.abort();
+			fft.dispose();
 			samples.dispose();
-			Tone.getTransport().stop();
-		};
-	});
+			loop.dispose();
 
-	$effect(() => {
-		// Load samples for the current kit
-		const kit = state.kit;
-		const kitSamples = Object.entries(kits[state.kit].lines);
-		Promise.all(
-			kitSamples.map(([line, { url }]) => addIfNotExists(samples, `${kit}-${line}`, url))
-		);
+			const transport = Tone.getTransport();
+			transport.stop();
+			transport.cancel();
+			transport.position = '0:0:0';
+		};
 	});
 
 	$effect(() => {
@@ -112,12 +108,33 @@ export default function useDrumMachine() {
 
 	const start = async () => {
 		await Tone.start();
-		loop.start();
+
+		await Promise.all(
+			Object.entries(kits).flatMap(([kitName, kit]) =>
+				Object.entries(kit.lines).map(([line, { url }]) =>
+					addIfNotExists(samples, `${kitName}-${line}`, url)
+				)
+			)
+		);
+
+		const transport = Tone.getTransport();
+		transport.cancel();
+		transport.position = '0:0:0';
+
+		loop.start(0);
+		transport.start();
+
 		state.playing = true;
 	};
 	const stop = () => {
-		loop.stop();
-		samples.stopAll();
+		loop.stop(0);
+		// samples.stopAll();
+
+		const transport = Tone.getTransport();
+		transport.stop();
+		transport.cancel();
+		transport.position = '0:0:0';
+
 		state.playing = false;
 		state.activeBeat = null;
 	};
