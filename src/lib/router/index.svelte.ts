@@ -47,6 +47,8 @@ export function bringWindowToFront(id: string, rest?: string) {
 	const idx = routerState.windows.findIndex((w) => w.id === id);
 	if (idx === -1) return;
 
+	routerState.windows[idx].minimised = false;
+
 	if (rest) {
 		routerState.windows[idx].rest = rest;
 	} else if (page.params.rest !== routerState.windows[idx].rest) {
@@ -73,4 +75,27 @@ export function setWindowPosition(id: string, pos: { x: number; y: number }) {
 	if (idx !== -1) {
 		routerState.windows[idx].pos = pos;
 	}
+}
+
+export function minimiseWindow(id: string) {
+	const idx = routerState.windows.findIndex((w) => w.id === id);
+	if (idx === -1) return;
+
+	routerState.windows[idx].minimised = true;
+	routerState.order = routerState.order.filter((wId) => wId !== id);
+
+	const active = routerState.windows.find((w) => w.id === routerState.order.at(-1));
+	if (active) {
+		goto(resolve('/[...rest]', { rest: active.rest }), {});
+	} else {
+		goto(resolve('/'), {});
+	}
+}
+
+export function showDesktop() {
+	routerState.windows.forEach((w) => {
+		w.minimised = true;
+	});
+	routerState.order = [];
+	goto(resolve('/'), {});
 }

@@ -2,6 +2,7 @@
 	import {
 		bringWindowToFront,
 		deleteWindow,
+		minimiseWindow,
 		routerState,
 		setWindowPosition
 	} from '$lib/router/index.svelte';
@@ -27,7 +28,7 @@
 </script>
 
 <div
-	style:z-index={zIndex}
+	style:z-index={zIndex === -1 ? 99 : zIndex}
 	class="pointer-events-none fixed inset-0 flex items-center justify-center"
 >
 	<div
@@ -51,7 +52,10 @@
 		}}
 		in:scale={{ duration: 150, easing: circOut, start: 0.9 }}
 		out:scale={{ duration: 100, easing: circIn, start: 0.9 }}
-		class="pointer-events-auto flex flex-col overflow-clip rounded-lg border border-stone-300 bg-white shadow-lg transition-shadow nd-dragging:shadow-2xl"
+		class={[
+			'flex flex-col overflow-clip rounded-lg border border-stone-300 bg-white shadow-lg transition-[box-shadow,opacity] nd-dragging:shadow-2xl',
+			openWindow.minimised ? 'opacity-0' : 'pointer-events-auto'
+		]}
 	>
 		<div
 			class="flex h-8 flex-none border-b border-stone-200 bg-linear-to-r from-orange-50 to-amber-50"
@@ -60,22 +64,13 @@
 				<img src={views[openWindow.view].icon} alt="" class="h-4" />
 				<span class="-mt-0.5 text-sm">{views[openWindow.view].title}</span>
 			</div>
-			<div class="relative">
-				<button
-					class="peer grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
-				>
-					<Minus class="size-4" />
-					<span class="sr-only">Minimise</span>
-				</button>
-				<div
-					class="pointer-events-none absolute top-full right-0 -mt-0.5 w-max rounded-sm border border-stone-200 bg-white px-1.5 shadow-xs transition not-peer-focus:-translate-y-0.5 not-peer-focus:opacity-0"
-				>
-					<div
-						class="absolute top-0 right-5 size-2 -translate-y-1/2 rotate-45 border-t border-l border-stone-200 bg-white"
-					></div>
-					<span class="text-sm leading-snug">coming soon™</span>
-				</div>
-			</div>
+			<button
+				onclick={() => minimiseWindow(id)}
+				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-stone-200"
+			>
+				<Minus class="size-4" />
+				<span class="sr-only">Minimise</span>
+			</button>
 			<button
 				onclick={() => deleteWindow(id)}
 				class="grid h-full w-12 place-items-center text-stone-600 transition hover:bg-red-600 hover:text-white"

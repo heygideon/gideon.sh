@@ -7,7 +7,12 @@
 
 	import Time from './Time.svelte';
 
-	import { bringWindowToFront, routerState } from '$lib/router/index.svelte';
+	import {
+		bringWindowToFront,
+		minimiseWindow,
+		routerState,
+		showDesktop
+	} from '$lib/router/index.svelte';
 	import { views } from '$lib/router/views';
 </script>
 
@@ -17,6 +22,7 @@
 	<div class="flex-1"></div>
 	<div class="flex items-center gap-0.5">
 		<button
+			onclick={() => showDesktop()}
 			class="group grid size-10 place-items-center rounded-sm border border-transparent transition hover:border-stone-300/50 hover:bg-white/50"
 		>
 			<img
@@ -28,7 +34,13 @@
 		{#each routerState.windows as window (window.id)}
 			{@const active = routerState.order.at(-1) === window.id}
 			<button
-				onclick={() => bringWindowToFront(window.id)}
+				onclick={() => {
+					if (active) {
+						minimiseWindow(window.id);
+					} else {
+						bringWindowToFront(window.id);
+					}
+				}}
 				class={[
 					'group relative grid size-10 place-items-center rounded-sm border transition',
 					active
