@@ -1,4 +1,4 @@
-import type { LineNumber } from './state.svelte';
+import type { LineNumber } from './state';
 
 export interface Kit {
 	name: string;
