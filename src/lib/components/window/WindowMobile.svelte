@@ -37,7 +37,7 @@
 			role="presentation"
 			in:fly|global={{ duration: 150, easing: circOut, y: 48 }}
 			out:fly|global={{ duration: 100, easing: circIn, y: 48 }}
-			class="pointer-events-auto flex size-full min-h-0 flex-1 flex-col overflow-clip rounded-t-lg border-t border-stone-300 bg-white shadow-lg transition"
+			class="pointer-events-auto flex size-full max-h-max min-h-0 flex-1 flex-col overflow-clip rounded-t-lg border-t border-stone-300 bg-white shadow-lg transition"
 		>
 			<div
 				class="flex h-8 flex-none border-b border-stone-200 bg-linear-to-r from-orange-50 to-amber-50"
