@@ -2,6 +2,7 @@
 	import FolderOpen from 'phosphor-svelte/lib/FolderOpen';
 	import { getContext } from 'svelte';
 	import type { PageData } from '../../routes/[...rest]/$types';
+	import { click } from '$lib/click';
 
 	const pageData = getContext<() => PageData>('pageData');
 
@@ -23,9 +24,9 @@
 		<div class="space-y-0.5">
 			{#each webrings.placeholder as item}
 				<button
-					ondblclick={() => {
+					{@attach click(() => {
 						open(item.website, '_blank');
-					}}
+					})}
 					class="flex h-10 w-full items-center gap-3 rounded-sm border border-transparent px-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 				>
 					<img src={item.img} height="31" width="88" alt="" class="shadow-xs" />

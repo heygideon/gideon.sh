@@ -13,6 +13,7 @@
 
 	import neocats from '$lib/assets/neocat';
 	import Presence from '$lib/components/desktop/Presence.svelte';
+	import { click } from '$lib/click';
 
 	const { data }: { data: PageData } = $props();
 	setContext('pageData', () => data);
@@ -56,7 +57,7 @@
 		<div class="mt-6 flex gap-4">
 			{#each Object.entries(views) as [key, { icon, title }]}
 				<button
-					ondblclick={() => goto(`/${key}`)}
+					{@attach click(() => goto(`/${key}`))}
 					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50"
 				>
 					<div class="relative">
