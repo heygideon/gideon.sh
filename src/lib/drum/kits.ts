@@ -91,20 +91,6 @@ export const houseKit: Kit = {
 	}
 };
 
-export const technoKit: Kit = {
-	name: 'Techno',
-	lines: {
-		0: { name: 'loop', url: '/samples/techno/berlin_loop.wav' },
-		1: { name: 'synth', url: '/samples/techno/berlin_stab.wav' },
-		2: { name: 'open-hi', url: '/samples/techno/berlin_ohat.wav', is: 'ohat' },
-		3: { name: 'closed-hi', url: '/samples/techno/berlin_hat.wav', is: 'hat' },
-		4: { name: 'clap', url: '/samples/techno/berlin_clap.wav' },
-		5: { name: 'snare', url: '/samples/techno/berlin_snare.wav' },
-		6: { name: 'bass', url: '/samples/techno/berlin_bass.wav' },
-		7: { name: 'kick', url: '/samples/techno/berlin_kick.wav' }
-	}
-};
-
 export const indieKit: Kit = {
 	name: 'Indie',
 	lines: {
@@ -168,7 +154,6 @@ export const kits = {
 	trap: trapKit,
 	eighties: eightiesKit,
 	house: houseKit,
-	techno: technoKit,
 	indie: indieKit,
 	jungle: jungleKit,
 	lofi: lofiKit
