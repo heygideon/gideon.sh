@@ -19,11 +19,11 @@
 <div
 	class="fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-linear-to-r from-orange-50/80 to-amber-50/80 px-6 backdrop-blur-2xl"
 >
-	<div class="flex-1"></div>
+	<div class="min-w-0 flex-1 max-lg:hidden"></div>
 	<div class="flex items-center gap-0.5">
 		<button
 			onclick={() => showDesktop()}
-			class="group grid size-10 place-items-center rounded-sm border border-transparent transition hover:border-stone-300/50 hover:bg-white/50"
+			class="group grid size-10 place-items-center rounded-sm border border-transparent transition hover:border-stone-300/50 hover:bg-white/50 max-lg:-ml-2"
 		>
 			<img
 				src={cat}
@@ -62,9 +62,9 @@
 			</button>
 		{/each}
 	</div>
-	<div class="flex flex-1 items-center justify-end gap-4 text-right">
-		<span class="text-sm">ENG</span>
-		<div class="flex items-center gap-2">
+	<div class="flex min-w-0 flex-1 items-center justify-end gap-4 text-right">
+		<span class="text-sm max-sm:hidden">ENG</span>
+		<div class="flex items-center gap-2 max-sm:hidden">
 			<WifiHigh class="size-4" />
 			<!-- <GlobeX class="size-4" /> -->
 			<BatteryHigh weight="fill" class="size-4" />
