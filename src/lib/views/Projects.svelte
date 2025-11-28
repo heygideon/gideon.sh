@@ -6,6 +6,7 @@
 
 	import type { PageData } from '../../routes/[...rest]/$types';
 	import { getContext } from 'svelte';
+	import { click } from '$lib/click';
 
 	const MONTHS = [
 		'January',
@@ -74,12 +75,12 @@
 			<span class="">Folder &middot; {projects.length} items</span>
 		</div>
 	</div>
-	<div class="grid grid-cols-2 gap-0.5 p-3">
+	<div class="grid grid-cols-1 gap-0.5 p-3 sm:grid-cols-2">
 		{#each projects as project}
 			<button
-				ondblclick={() => {
+				{@attach click(() => {
 					goto(`/work/${project.slug}`);
-				}}
+				})}
 				class="h-fit rounded-sm border border-transparent p-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 			>
 				<div class="rounded-lg border border-stone-300 bg-stone-50 p-1">

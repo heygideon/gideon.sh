@@ -2,6 +2,7 @@
 	import FolderOpen from 'phosphor-svelte/lib/FolderOpen';
 	import { getContext } from 'svelte';
 	import type { PageData } from '../../routes/[...rest]/$types';
+	import { click } from '$lib/click';
 
 	const pageData = getContext<() => PageData>('pageData');
 
@@ -20,17 +21,19 @@
 <div class="space-y-6 p-3">
 	<section>
 		<p class="mb-2 px-3 text-sm leading-none font-semibold text-stone-600">placeholder</p>
-		<div class="space-y-0.5">
+		<div class="flex flex-wrap gap-2">
 			{#each webrings.placeholder as item}
 				<button
-					ondblclick={() => {
+					{@attach click(() => {
 						open(item.website, '_blank');
-					}}
-					class="flex h-10 w-full items-center gap-3 rounded-sm border border-transparent px-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
+					})}
+					class="flex w-28 flex-none flex-col items-center rounded-sm border border-transparent py-2 text-center hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 				>
 					<img src={item.img} height="31" width="88" alt="" class="shadow-xs" />
-					<span class="min-w-0 flex-1">{item.name}</span>
-					<span class="min-w-0 flex-1 text-stone-600">{item.website}</span>
+					<div class="mt-1.5 w-full px-3">
+						<p class="truncate">{item.name}</p>
+						<p class="truncate text-xs text-stone-600">{item.website}</p>
+					</div>
 				</button>
 			{/each}
 		</div>

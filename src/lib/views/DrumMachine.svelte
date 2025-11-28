@@ -28,8 +28,13 @@
 	};
 </script>
 
-<div class="size-full bg-stone-900 bg-drum-back font-pxl text-white inset-shadow-sm">
+<div
+	class="min-h-full bg-stone-900 bg-drum-back font-pxl text-white inset-shadow-sm max-lg:min-w-[792px] lg:h-full"
+>
 	<div class="flex size-full animate-load-in flex-col">
+		<div class="flex h-7 flex-none items-center border-b border-sky-900 bg-sky-950 px-6 lg:hidden">
+			<p class="text-xs text-sky-200">fyi: this works better on a computer!</p>
+		</div>
 		<div class="p-6">
 			<p class="flex justify-between text-3xl text-stone-700">
 				<span class="bg-linear-to-b from-amber-300 to-amber-400 bg-clip-text text-transparent"
@@ -41,6 +46,7 @@
 			<div class="mt-4 flex gap-3">
 				<button
 					onclick={() => {
+						if (drumState.loading) return;
 						if (drumState.playing) {
 							stop();
 						} else {
@@ -50,7 +56,10 @@
 					class="grid size-10 place-items-center rounded-full border border-stone-600 bg-stone-800 text-sm transition hover:scale-105 hover:border-stone-500 hover:bg-stone-700"
 					title="Play"
 				>
-					{#if drumState.playing}
+					{#if drumState.loading}
+						<span class="size-4 animate-spin rounded-full border border-transparent border-r-white"
+						></span>
+					{:else if drumState.playing}
 						<Pause weight="fill" class="size-4 text-amber-300" />
 					{:else}
 						<Play weight="fill" class="size-4 text-stone-300" />
@@ -146,7 +155,7 @@
 			</div>
 		</div>
 		<div
-			class="flex flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1 inset-shadow-sm"
+			class="flex min-h-20 flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1 inset-shadow-sm lg:min-h-0"
 		>
 			{#each drumState.fft as value, index (index)}
 				<div
@@ -157,8 +166,8 @@
 		</div>
 
 		<div class="space-y-1.5 p-6 pl-0">
-			<div class="flex">
-				<div class="min-w-0 flex-1"></div>
+			<div class="flex justify-center">
+				<div class="mr-3 min-w-0 flex-1 max-lg:max-w-20"></div>
 				<div class="flex flex-none gap-1.5 text-center text-xs">
 					{#each { length: 16 } as _, index}
 						{@const isBeat = (index + 1) % 4 === 1}
@@ -188,11 +197,11 @@
 			{#each entriesOf(kits[drumState.kit].lines) as [key, line]}
 				<div
 					class={[
-						'flex items-center',
+						'flex items-center justify-center',
 						(hasSolo ? !drumState.lines[key].solo : drumState.lines[key].muted) && 'opacity-50'
 					]}
 				>
-					<p class="mr-3 min-w-0 flex-1 text-right text-xs">{line.name}</p>
+					<p class="mr-3 min-w-0 flex-1 text-right text-xs max-lg:max-w-20">{line.name}</p>
 					<div class="flex flex-none gap-1.5">
 						{#each { length: 16 } as _, index}
 							<button

@@ -13,6 +13,7 @@
 
 	import neocats from '$lib/assets/neocat';
 	import Presence from '$lib/components/desktop/Presence.svelte';
+	import { click } from '$lib/click';
 
 	const { data }: { data: PageData } = $props();
 	setContext('pageData', () => data);
@@ -39,8 +40,8 @@
 
 <div class="flex size-full flex-col items-center justify-center">
 	<div>
-		<div class="flex">
-			<h1 class="text-8xl">
+		<div class="flex max-lg:flex-col-reverse">
+			<h1 class="text-5xl sm:text-7xl lg:text-8xl">
 				<span class="font-semibold">Hey, I’m Gideon,</span><br />
 				and I make things.
 			</h1>
@@ -48,26 +49,26 @@
 				onclick={() => {
 					catIdx = (catIdx + 1) % neocats.length;
 				}}
-				class="-mt-4 -ml-2 block size-fit rotate-12 transition hover:scale-110 hover:rotate-6 active:scale-95 active:opacity-75"
+				class="block size-fit rotate-6 transition hover:scale-110 hover:rotate-6 active:scale-95 active:opacity-75 max-lg:mb-2 lg:-mt-4 lg:-ml-2 lg:rotate-12"
 			>
-				<img src={neocat} alt="" class="size-32 drop-shadow-md" />
+				<img src={neocat} alt="" class="size-16 drop-shadow-md sm:size-24 lg:size-32" />
 			</button>
 		</div>
-		<div class="mt-6 flex gap-4">
+		<div class="mt-6 flex gap-4 max-sm:flex-col">
 			{#each Object.entries(views) as [key, { icon, title }]}
 				<button
-					ondblclick={() => goto(`/${key}`)}
-					class="flex w-20 flex-col items-center rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50"
+					{@attach click(() => goto(`/${key}`))}
+					class="flex items-center gap-x-2.5 gap-y-1 rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50 max-sm:-m-2 max-sm:p-2 sm:w-20 sm:flex-col"
 				>
 					<div class="relative">
-						<img src={icon} alt="" class="h-12 drop-shadow-xs" />
+						<img src={icon} alt="" class="h-8 drop-shadow-xs sm:h-12" />
 						<div
 							class="absolute bottom-0 left-0 grid size-3 place-items-center border border-stone-300/50 bg-white"
 						>
 							<ArrowUpRight weight="bold" class="size-2 text-sky-600" />
 						</div>
 					</div>
-					<span class="mt-1 text-sm">{title}</span>
+					<span class="sm:text-sm">{title}</span>
 				</button>
 			{/each}
 		</div>

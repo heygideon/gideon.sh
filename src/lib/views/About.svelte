@@ -56,11 +56,13 @@
 <div
 	class="sticky -bottom-px flex h-7 items-center justify-end border-t border-stone-200 bg-stone-50 px-6 text-xs text-stone-600"
 >
-	<span class="w-20">
+	<span class="w-20 flex-auto">
 		{wordCount} words
 	</span>
-	<div class="min-w-0 flex-1 border-l border-stone-200 pl-2 leading-snug">Plain text</div>
-	<div class="w-14 border-l border-stone-200 pl-2 leading-snug">100%</div>
-	<div class="w-32 border-l border-stone-200 pl-2 leading-snug">Windows (CRLF)</div>
-	<div class="w-32 border-l border-stone-200 pl-2 leading-snug">UTF-8</div>
+	<div class="w-44 flex-auto border-l border-stone-200 pl-2 leading-snug">Plain text</div>
+	<div class="w-14 flex-auto border-l border-stone-200 pl-2 leading-snug">100%</div>
+	<div class="w-32 flex-auto border-l border-stone-200 pl-2 leading-snug max-sm:hidden">
+		Windows (CRLF)
+	</div>
+	<div class="w-32 flex-auto border-l border-stone-200 pl-2 leading-snug max-sm:hidden">UTF-8</div>
 </div>

@@ -15,6 +15,7 @@ export interface DrumState {
 	volume: number;
 	swing: number;
 
+	loading: boolean;
 	playing: boolean;
 	activeBeat: number | null;
 	fft: number[];
@@ -36,6 +37,7 @@ export const initialState: DrumState = {
 	volume: 0,
 	swing: 0,
 
+	loading: false,
 	playing: false,
 	activeBeat: null,
 	fft: []
