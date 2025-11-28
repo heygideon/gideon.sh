@@ -75,7 +75,7 @@
 			<span class="">Folder &middot; {projects.length} items</span>
 		</div>
 	</div>
-	<div class="grid grid-cols-2 gap-0.5 p-3">
+	<div class="grid grid-cols-1 gap-0.5 p-3 sm:grid-cols-2">
 		{#each projects as project}
 			<button
 				{@attach click(() => {
