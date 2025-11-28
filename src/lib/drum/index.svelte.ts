@@ -107,8 +107,9 @@ export default function useDrumMachine() {
 	});
 
 	const start = async () => {
-		await Tone.start();
+		state.loading = true;
 
+		await Tone.start();
 		await Promise.all(
 			Object.entries(kits).flatMap(([kitName, kit]) =>
 				Object.entries(kit.lines).map(([line, { url }]) =>
@@ -124,6 +125,7 @@ export default function useDrumMachine() {
 		loop.start(0);
 		transport.start();
 
+		state.loading = false;
 		state.playing = true;
 	};
 	const stop = () => {

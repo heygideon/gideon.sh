@@ -46,6 +46,7 @@
 			<div class="mt-4 flex gap-3">
 				<button
 					onclick={() => {
+						if (drumState.loading) return;
 						if (drumState.playing) {
 							stop();
 						} else {
@@ -55,7 +56,10 @@
 					class="grid size-10 place-items-center rounded-full border border-stone-600 bg-stone-800 text-sm transition hover:scale-105 hover:border-stone-500 hover:bg-stone-700"
 					title="Play"
 				>
-					{#if drumState.playing}
+					{#if drumState.loading}
+						<span class="size-4 animate-spin rounded-full border border-transparent border-r-white"
+						></span>
+					{:else if drumState.playing}
 						<Pause weight="fill" class="size-4 text-amber-300" />
 					{:else}
 						<Play weight="fill" class="size-4 text-stone-300" />
