@@ -2,10 +2,11 @@
 
 Welcome - this is my little corner of the interwebs! Made for Hack Club's [personal site YSWS](https://page.hackclub.com).
 
+You can find it [right here](https://gideon.sh/) - go check it out!
+
 | Before | ✨ After |
 | ------ | -------- |
 | <img width="2360" height="1640" alt="website-old" src="https://github.com/user-attachments/assets/5e831430-1c82-49ef-9d59-8ff048e0993d" /> | <img width="2360" height="1640" alt="website-new" src="https://github.com/user-attachments/assets/6bad4114-5d28-42ae-a729-1fd7267d504b" /> |
-
 
 ## New things
 
