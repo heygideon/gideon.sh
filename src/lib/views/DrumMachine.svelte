@@ -162,7 +162,7 @@
 			</div>
 		</div>
 		<div
-			class="flex min-h-20 flex-1 items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1 inset-shadow-sm lg:min-h-0"
+			class="flex min-h-0 flex-none items-end gap-2 border-y border-stone-800 bg-stone-950 px-6 py-1 inset-shadow-sm max-lg:h-20 lg:flex-1"
 		>
 			{#each drumState.fft as value, index (index)}
 				<div
