@@ -10,7 +10,6 @@ async function getPlaceholderWebring() {
 		website: string;
 		img: string;
 	}>;
-	console.log(data);
 
 	return data.filter((item) => item.name.toLowerCase() !== 'gideon');
 }
