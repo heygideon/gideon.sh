@@ -43,24 +43,29 @@
 	<div>
 		<div class="flex max-lg:flex-col-reverse">
 			<h1 class="text-5xl sm:text-7xl lg:text-8xl">
-				<span class="font-semibold">Hey, I’m Gideon,</span><br />
-				and I make things.
+				<span class="animate-slide-up block font-semibold" style:animation-delay="0.2s"
+					>Hey, I’m Gideon,</span
+				>
+				<span class="animate-slide-up block" style:animation-delay="0.3s">and I make things.</span>
 			</h1>
 			<button
 				onclick={() => {
 					catIdx = (catIdx + 1) % neocats.length;
 					clickSound.play();
 				}}
-				class="block size-fit rotate-6 transition hover:scale-110 hover:rotate-6 active:scale-95 active:opacity-75 max-lg:mb-2 lg:-mt-4 lg:-ml-2 lg:rotate-12"
+				class="animate-pop-in block size-fit rotate-6 transition hover:scale-110 hover:rotate-6 active:scale-95 active:opacity-75 max-lg:mb-2 lg:-mt-4 lg:-ml-2 lg:rotate-12"
+				style:animation-delay="0.5s"
 			>
 				<img src={neocat} alt="" class="size-16 drop-shadow-md sm:size-24 lg:size-32" />
 			</button>
 		</div>
 		<div class="mt-6 flex gap-4 max-sm:flex-col">
-			{#each Object.entries(views) as [key, { icon, title }]}
+			{#each Object.entries(views) as [key, { icon, title }], index}
 				<button
 					{@attach click(() => goto(`/${key}`))}
-					class="flex items-center gap-x-2.5 gap-y-1 rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50 max-sm:-m-2 max-sm:p-2 sm:w-20 sm:flex-col"
+					class="animate-slide-left-icon flex items-center gap-x-2.5 gap-y-1 rounded-sm border border-transparent pb-0.5 text-center hover:border-stone-300/50 hover:bg-white/20 hover:backdrop-blur-xs focus:border-stone-300 focus:bg-white/50 max-sm:-m-2 max-sm:p-2 sm:w-20 sm:flex-col"
+					style:animation-delay="0.8s"
+					style:--index={index}
 				>
 					<div class="relative">
 						<img src={icon} alt="" class="h-8 drop-shadow-xs sm:h-12" />

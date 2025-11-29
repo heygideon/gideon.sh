@@ -84,7 +84,8 @@
 </script>
 
 <div
-	class="fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-linear-to-r from-orange-50/80 to-amber-50/80 px-6 backdrop-blur-2xl"
+	style:animation-delay="0.2s"
+	class="animate-slide-up fixed inset-x-0 bottom-0 z-20 flex h-12 border-t border-stone-300/50 bg-linear-to-r from-orange-50/80 to-amber-50/80 px-6 backdrop-blur-2xl"
 >
 	<div class="min-w-0 flex-1 max-lg:hidden"></div>
 	<div class="flex items-center gap-0.5">
