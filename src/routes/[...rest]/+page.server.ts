@@ -1,5 +1,6 @@
 import { allProjects } from 'content-collections';
 import type { PageServerLoad } from './$types';
+import neocats from '$lib/assets/neocat';
 
 async function getPlaceholderWebring() {
 	const res = await fetch('https://webring.phthallo.com/api/members');
@@ -35,5 +36,7 @@ export const load: PageServerLoad = async () => {
 	const placeholder = await getPlaceholderWebring();
 	const projects = await getProjects();
 
-	return { webrings: { placeholder }, projects };
+	const neocatIdx = Math.floor(Math.random() * neocats.length);
+
+	return { webrings: { placeholder }, projects, neocatIdx };
 };

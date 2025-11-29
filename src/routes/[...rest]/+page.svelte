@@ -33,7 +33,7 @@
 		}
 	});
 
-	let catIdx = $state(Math.floor(Math.random() * neocats.length));
+	let catIdx = $state(data.neocatIdx);
 	let neocat = $derived(neocats[catIdx]);
 </script>
 
