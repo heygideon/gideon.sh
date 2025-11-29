@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		bringWindowToFront,
-		deleteWindow,
-		minimiseWindow,
-		routerState
-	} from '$lib/router/index.svelte';
+	import { deleteWindow, minimiseWindow, routerState } from '$lib/router/index.svelte';
 	import { views } from '$lib/router/views';
 	import type { WindowProps } from './Window.svelte';
 
@@ -19,17 +14,16 @@
 	const zIndex = $derived(routerState.order.findIndex((wId) => wId === id));
 </script>
 
-<div
-	role="presentation"
-	onclick={() => deleteWindow(id)}
-	style:z-index={zIndex === -1 ? 99 : zIndex}
-	in:fade|global={{ duration: 150 }}
-	out:fade|global={{ duration: 100 }}
-	class={[
-		'fixed inset-0 bg-black/50 transition-opacity',
-		openWindow.minimised ? 'pointer-events-none opacity-0' : 'pointer-events-auto'
-	]}
-></div>
+{#if !openWindow.minimised}
+	<div
+		role="presentation"
+		onclick={() => deleteWindow(id)}
+		style:z-index={zIndex === -1 ? 99 : zIndex}
+		in:fade|global={{ duration: 150, easing: circOut }}
+		out:fade|global={{ duration: 100, easing: circIn }}
+		class="fixed inset-0 bg-black/50 transition-opacity"
+	></div>
+{/if}
 <div
 	style:z-index={zIndex === -1 ? 99 : zIndex}
 	class="pointer-events-none fixed inset-0 flex flex-col justify-end pt-12"
