@@ -17,7 +17,7 @@
 {#if !openWindow.minimised}
 	<div
 		role="presentation"
-		onclick={() => deleteWindow(id)}
+		onclick={() => minimiseWindow(id)}
 		style:z-index={zIndex === -1 ? 99 : zIndex}
 		in:fade|global={{ duration: 150, easing: circOut }}
 		out:fade|global={{ duration: 100, easing: circIn }}
