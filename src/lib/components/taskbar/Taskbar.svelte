@@ -1,9 +1,43 @@
+<script module lang="ts">
+	declare global {
+		interface BatteryManager {
+			/** A Boolean value indicating whether the battery is currently being charged.*/
+			readonly charging: boolean;
+			/** A number representing the remaining time in seconds until the battery is fully charged, or 0 if the battery is already fully charged. */
+			readonly chargingTime: number;
+			/** A number representing the remaining time in seconds until the battery is completely discharged and the system suspends. */
+			readonly dischargingTime: number;
+			/** A number representing the system's battery charge level scaled to a value between 0.0 and 1.0. */
+			readonly level: number;
+
+			addEventListener(
+				type: 'chargingchange' | 'chargingtimechange' | 'dischargingtimechange' | 'levelchange',
+				listener: (this: BatteryManager, ev: Event) => any,
+				options?: boolean | AddEventListenerOptions
+			): void;
+			removeEventListener(
+				type: 'chargingchange' | 'chargingtimechange' | 'dischargingtimechange' | 'levelchange',
+				listener: (this: BatteryManager, ev: Event) => any,
+				options?: boolean | EventListenerOptions
+			): void;
+		}
+
+		interface Navigator {
+			getBattery?: () => Promise<BatteryManager>;
+		}
+	}
+</script>
+
 <script lang="ts">
 	import cat from '$lib/assets/images/a-cat.svg';
 
 	import GlobeX from 'phosphor-svelte/lib/GlobeX';
 	import WifiHigh from 'phosphor-svelte/lib/WifiHigh';
+
+	import BatteryLow from 'phosphor-svelte/lib/BatteryLow';
+	import BatteryMedium from 'phosphor-svelte/lib/BatteryMedium';
 	import BatteryHigh from 'phosphor-svelte/lib/BatteryHigh';
+	import BatteryFull from 'phosphor-svelte/lib/BatteryFull';
 
 	import Time from './Time.svelte';
 
@@ -14,6 +48,39 @@
 		showDesktop
 	} from '$lib/router/index.svelte';
 	import { views } from '$lib/router/views';
+	import { onMount } from 'svelte';
+
+	let batteryLevel = $state(100);
+	let batteryManager: BatteryManager | null = null;
+	onMount(() => {
+		if (!navigator.getBattery) return;
+
+		const updateBatteryLevel = () => {
+			if (!batteryManager) return;
+			batteryLevel = Math.round(batteryManager.level * 100);
+		};
+
+		navigator.getBattery().then((battery) => {
+			batteryManager = battery;
+
+			updateBatteryLevel();
+			batteryManager.addEventListener('levelchange', updateBatteryLevel);
+		});
+
+		return () => {
+			if (batteryManager) {
+				batteryManager.removeEventListener('levelchange', updateBatteryLevel);
+				batteryManager = null;
+			}
+		};
+	});
+
+	const BatteryIcon = $derived.by(() => {
+		if (batteryLevel >= 75) return BatteryFull;
+		if (batteryLevel >= 50) return BatteryHigh;
+		if (batteryLevel >= 25) return BatteryMedium;
+		return BatteryLow;
+	});
 </script>
 
 <div
@@ -64,10 +131,13 @@
 	</div>
 	<div class="flex min-w-0 flex-1 items-center justify-end gap-4 text-right">
 		<span class="text-sm max-sm:hidden">ENG</span>
-		<div class="flex items-center gap-2 max-sm:hidden">
+		<div
+			title={`${batteryLevel}% battery`}
+			class="-mx-2 flex h-10 items-center gap-2 rounded-sm border border-transparent px-2 transition hover:border-stone-300/50 hover:bg-white/50 max-sm:hidden"
+		>
 			<WifiHigh class="size-4" />
 			<!-- <GlobeX class="size-4" /> -->
-			<BatteryHigh weight="fill" class="size-4" />
+			<BatteryIcon weight="fill" class="size-4" />
 		</div>
 		<Time />
 	</div>
