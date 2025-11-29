@@ -16,21 +16,26 @@ async function getPlaceholderWebring() {
 	return Object.values(data).filter((item) => item.name.toLowerCase() !== 'gideon');
 }
 
+async function getProjects() {
+	const projectsPromises = allProjects
+		.toSorted((a, b) => b.year - a.year || b.month - a.month)
+		.map(async (project) => {
+			const resolvedImage: string = await import(
+				`$lib/assets/projects/${project.image.id}.png`
+			).then((mod) => mod.default);
+			return {
+				...project,
+				image: { ...project.image, src: resolvedImage }
+			};
+		});
+
+	const projects = await Promise.all(projectsPromises);
+	return projects;
+}
+
 export const load: PageServerLoad = async () => {
-	const placeholder = await getPlaceholderWebring();
-	const projects = await Promise.all(
-		allProjects
-			.toSorted((a, b) => b.year - a.year || b.month - a.month)
-			.map(async (project) => {
-				const resolvedImage: string = await import(
-					`$lib/assets/projects/${project.image.id}.png`
-				).then((mod) => mod.default);
-				return {
-					...project,
-					image: { ...project.image, src: resolvedImage }
-				};
-			})
-	);
+	const placeholder = getPlaceholderWebring();
+	const projects = await getProjects();
 
 	return { webrings: { placeholder }, projects };
 };
