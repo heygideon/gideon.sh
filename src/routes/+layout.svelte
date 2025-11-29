@@ -4,6 +4,7 @@
 	import './layout.css';
 
 	import favicon from '$lib/assets/favicon.png';
+	import og from '$lib/assets/og.png';
 
 	import Background from '$lib/components/desktop/Background.svelte';
 	import { onMount } from 'svelte';
@@ -19,6 +20,11 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>Gideon's website</title>
+	<meta name="description" content="heygideon's little corner of the interwebs" />
+	<meta property="og:title" content="Gideon's website" />
+	<meta property="og:description" content="heygideon's little corner of the interwebs" />
+	<meta property="og:image" content={og} />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <div class="bg fixed inset-0 -z-10 size-full"></div>
