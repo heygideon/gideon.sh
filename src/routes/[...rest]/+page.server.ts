@@ -3,17 +3,15 @@ import type { PageServerLoad } from './$types';
 
 async function getPlaceholderWebring() {
 	const res = await fetch('https://webring.phthallo.com/api/members');
-	const data = (await res.json()) as Record<
-		string,
-		{
-			name: string;
-			description: string;
-			website: string;
-			img: string;
-		}
-	>;
+	const data = (await res.json()) as Array<{
+		name: string;
+		description: string;
+		website: string;
+		img: string;
+	}>;
+	console.log(data);
 
-	return Object.values(data).filter((item) => item.name.toLowerCase() !== 'gideon');
+	return data.filter((item) => item.name.toLowerCase() !== 'gideon');
 }
 
 async function getProjects() {
@@ -34,7 +32,7 @@ async function getProjects() {
 }
 
 export const load: PageServerLoad = async () => {
-	const placeholder = getPlaceholderWebring();
+	const placeholder = await getPlaceholderWebring();
 	const projects = await getProjects();
 
 	return { webrings: { placeholder }, projects };
