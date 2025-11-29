@@ -14,6 +14,7 @@
 	import neocats from '$lib/assets/neocat';
 	import Presence from '$lib/components/desktop/Presence.svelte';
 	import { click } from '$lib/click';
+	import { clickSound } from '$lib/sfx';
 
 	const { data }: { data: PageData } = $props();
 	setContext('pageData', () => data);
@@ -48,6 +49,7 @@
 			<button
 				onclick={() => {
 					catIdx = (catIdx + 1) % neocats.length;
+					clickSound.play();
 				}}
 				class="block size-fit rotate-6 transition hover:scale-110 hover:rotate-6 active:scale-95 active:opacity-75 max-lg:mb-2 lg:-mt-4 lg:-ml-2 lg:rotate-12"
 			>

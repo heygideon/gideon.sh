@@ -5,6 +5,7 @@
 	import { getContext } from 'svelte';
 	import type { PageData } from '../../routes/[...rest]/$types';
 	import { click } from '$lib/click';
+	import { clickSound } from '$lib/sfx';
 
 	const pageData = getContext<() => PageData>('pageData');
 
@@ -43,7 +44,10 @@
 				<span class="truncate">{buttonLink}</span>
 			</div>
 			<button
-				onclick={copyButtonLink}
+				onclick={() => {
+					clickSound.play();
+					copyButtonLink();
+				}}
 				class="grid w-8 flex-none place-items-center border-l border-stone-300 hover:bg-stone-100"
 			>
 				{#if copied}
@@ -66,6 +70,7 @@
 			{#each webrings.placeholder as item}
 				<button
 					{@attach click(() => {
+						clickSound.play();
 						open(item.website, '_blank');
 					})}
 					class="flex w-28 flex-none flex-col items-center rounded-sm border border-transparent py-2 text-center hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"

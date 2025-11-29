@@ -1,7 +1,14 @@
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
 import { page } from '$app/state';
+import {
+	windowCloseSound,
+	windowMinimiseSound,
+	windowOpenSound,
+	windowRestoreSound
+} from '$lib/sfx';
 import type { views } from './views';
+import { v4 as uuid } from 'uuid';
 
 interface WindowEntry {
 	id: string;
@@ -17,7 +24,7 @@ export const routerState = $state({
 });
 
 export function openWindow(view: keyof typeof views, rest?: string) {
-	const id = crypto.randomUUID();
+	const id = uuid();
 	routerState.windows.push({
 		id,
 		view,
@@ -26,6 +33,8 @@ export function openWindow(view: keyof typeof views, rest?: string) {
 		minimised: false
 	});
 	routerState.order.push(id);
+
+	windowOpenSound.play();
 }
 
 export function deleteWindow(id: string) {
@@ -38,6 +47,8 @@ export function deleteWindow(id: string) {
 	} else {
 		goto(resolve('/'), {});
 	}
+
+	windowCloseSound.play();
 }
 
 export function bringWindowToFront(id: string, rest?: string) {
@@ -47,7 +58,10 @@ export function bringWindowToFront(id: string, rest?: string) {
 	const idx = routerState.windows.findIndex((w) => w.id === id);
 	if (idx === -1) return;
 
-	routerState.windows[idx].minimised = false;
+	if (routerState.windows[idx].minimised) {
+		routerState.windows[idx].minimised = false;
+		windowRestoreSound.play();
+	}
 
 	if (rest) {
 		routerState.windows[idx].rest = rest;
@@ -90,6 +104,8 @@ export function minimiseWindow(id: string) {
 	} else {
 		goto(resolve('/'), {});
 	}
+
+	windowMinimiseSound.play();
 }
 
 export function showDesktop() {

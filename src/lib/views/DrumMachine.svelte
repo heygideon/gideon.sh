@@ -6,6 +6,7 @@
 	import CaretUp from 'phosphor-svelte/lib/CaretUp';
 	import CaretDown from 'phosphor-svelte/lib/CaretDown';
 	import useDrumMachine from '$lib/drum/index.svelte';
+	import { clickSound, playDialSound } from '$lib/sfx';
 
 	const clamp = (min: number, value: number, max: number) => Math.min(Math.max(value, min), max);
 
@@ -52,6 +53,7 @@
 						} else {
 							start();
 						}
+						clickSound.play();
 					}}
 					class="grid size-10 place-items-center rounded-full border border-stone-600 bg-stone-800 text-sm transition hover:scale-105 hover:border-stone-500 hover:bg-stone-700"
 					title="Play"
@@ -95,6 +97,7 @@
 					<div class="flex flex-col border-l border-stone-700">
 						<button
 							onclick={() => {
+								clickSound.play();
 								drumState.tempo = Math.min(drumState.tempo + 1, 240);
 							}}
 							class="grid min-h-0 w-6 flex-1 place-items-center hover:bg-stone-800"
@@ -104,6 +107,7 @@
 						<hr class="border-inherit" />
 						<button
 							onclick={() => {
+								clickSound.play();
 								drumState.tempo = Math.max(drumState.tempo - 1, 60);
 							}}
 							class="grid min-h-0 w-6 flex-1 place-items-center hover:bg-stone-800"
@@ -114,6 +118,7 @@
 				</div>
 				<select
 					bind:value={drumState.kit}
+					onclick={() => clickSound.play()}
 					class="h-10 rounded-sm border border-stone-700 bg-stone-900 px-3 text-sm hover:bg-stone-800 focus:bg-stone-800"
 				>
 					{#each Object.entries(kits) as [key, kit]}
@@ -133,6 +138,7 @@
 						max="4"
 						step="1"
 						bind:value={drumState.volume}
+						oninput={() => playDialSound()}
 						class="h-6 w-full cursor-pointer accent-amber-500"
 					/>
 				</div>
@@ -149,6 +155,7 @@
 						max="1"
 						step="0.1"
 						bind:value={drumState.swing}
+						oninput={() => playDialSound()}
 						class="h-6 w-full cursor-pointer accent-amber-500"
 					/>
 				</div>

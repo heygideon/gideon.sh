@@ -7,6 +7,7 @@
 	import type { PageData } from '../../routes/[...rest]/$types';
 	import { getContext } from 'svelte';
 	import { click } from '$lib/click';
+	import { clickSound } from '$lib/sfx';
 
 	const MONTHS = [
 		'January',
@@ -43,6 +44,7 @@
 	<div class="p-6">
 		<button
 			onclick={() => {
+				clickSound.play();
 				goto('/work');
 			}}
 			class="h-7 rounded-sm border border-stone-300 bg-stone-50 px-2.5 text-sm transition hover:border-amber-600 hover:bg-amber-100"
@@ -79,6 +81,7 @@
 		{#each projects as project}
 			<button
 				{@attach click(() => {
+					clickSound.play();
 					goto(`/work/${project.slug}`);
 				})}
 				class="h-fit rounded-sm border border-transparent p-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"

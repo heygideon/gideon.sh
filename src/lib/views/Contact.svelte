@@ -6,6 +6,7 @@
 	import hackClub from '$lib/assets/images/hack-club.svg';
 	import SiGithub from '$lib/components/icons/SiGithub.svelte';
 	import { click } from '$lib/click';
+	import { clickSound } from '$lib/sfx';
 
 	const email = 'hs.noedig@yeh'.split('').reverse().join('');
 	const pairs = email.match(/.{1,2}/g)!;
@@ -32,9 +33,10 @@
 </div>
 <div class="space-y-0.5 p-3">
 	<button
-		{@attach click(() =>
-			window.open('https://hackclub.enterprise.slack.com/team/U09D42Q0ARJ', '_blank')
-		)}
+		{@attach click(() => {
+			clickSound.play();
+			window.open('https://hackclub.enterprise.slack.com/team/U09D42Q0ARJ', '_blank');
+		})}
 		class="flex h-8 w-full items-center gap-2 rounded-sm border border-transparent px-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 	>
 		<img src={hackClub} alt="" class="size-4" />
@@ -42,7 +44,10 @@
 		<span class="min-w-0 flex-1 text-stone-600">gideon</span>
 	</button>
 	<button
-		{@attach click(() => window.open('https://github.com/heygideon', '_blank'))}
+		{@attach click(() => {
+			clickSound.play();
+			window.open('https://github.com/heygideon', '_blank');
+		})}
 		class="flex h-8 w-full items-center gap-2 rounded-sm border border-transparent px-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 	>
 		<SiGithub class="size-4" />
@@ -50,7 +55,10 @@
 		<span class="min-w-0 flex-1 text-stone-600">heygideon</span>
 	</button>
 	<button
-		{@attach click(copyEmail)}
+		{@attach click(() => {
+			copyEmail();
+			clickSound.play();
+		})}
 		class="flex h-8 w-full items-center gap-2 rounded-sm border border-transparent px-3 text-left hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
 	>
 		<EnvelopeSimple class="size-4" />

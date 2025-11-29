@@ -23,6 +23,7 @@
 		"@sveltejs/kit": "^2.47.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tailwindcss/vite": "^4.1.14",
+		"@types/howler": "^2.2.12",
 		"@types/node": "^22",
 		"eslint": "^9.38.0",
 		"eslint-config-prettier": "^10.1.8",
@@ -45,8 +46,10 @@
 		"@fontsource-variable/crimson-pro": "^5.2.8",
 		"@neodrag/svelte": "3.0.0-next.8",
 		"date-fns": "^4.1.0",
+		"howler": "^2.2.4",
 		"ofetch": "^1.5.1",
 		"phosphor-svelte": "^3.0.1",
-		"tone": "^15.1.22"
+		"tone": "^15.1.22",
+		"uuid": "^13.0.0"
 	}
 }
