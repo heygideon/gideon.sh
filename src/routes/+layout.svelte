@@ -3,7 +3,7 @@
 	import '@fontsource-variable/crimson-pro/wght-italic.css';
 	import './layout.css';
 
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.png';
 
 	import Background from '$lib/components/desktop/Background.svelte';
 	import { onMount } from 'svelte';
@@ -18,6 +18,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Gideon's website</title>
 </svelte:head>
 
 <div class="bg fixed inset-0 -z-10 size-full"></div>
