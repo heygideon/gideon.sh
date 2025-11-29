@@ -114,4 +114,6 @@ export function showDesktop() {
 	});
 	routerState.order = [];
 	goto(resolve('/'), {});
+
+	windowMinimiseSound.play();
 }
