@@ -23,8 +23,9 @@
 	<meta name="description" content="heygideon's little corner of the interwebs" />
 	<meta property="og:title" content="Gideon's website" />
 	<meta property="og:description" content="heygideon's little corner of the interwebs" />
-	<meta property="og:image" content={og} />
+	<meta property="og:image" content={`https://gideon.sh${og}`} />
 	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://gideon.sh" />
 </svelte:head>
 
 <div class="bg fixed inset-0 -z-10 size-full"></div>
