@@ -4,7 +4,12 @@
 
 	import { goto, afterNavigate } from '$app/navigation';
 	import { views } from '$lib/router/views';
-	import { bringWindowToFront, openWindow, routerState } from '$lib/router/index.svelte';
+	import {
+		bringWindowToFront,
+		openWindow,
+		routerState,
+		showDesktop
+	} from '$lib/router/index.svelte';
 
 	import Taskbar from '$lib/components/taskbar/Taskbar.svelte';
 	import Window from '$lib/components/window/Window.svelte';
@@ -23,13 +28,17 @@
 		if (!navigation.to?.params) return;
 
 		const view = navigation.to.params.rest!.split('/')[0];
-		if (view && view in views) {
-			const existingWindow = routerState.windows.find((window) => window.view === view);
-			if (existingWindow) {
-				bringWindowToFront(existingWindow.id, navigation.to.params.rest);
-			} else {
-				openWindow(view as keyof typeof views, navigation.to.params.rest);
+		if (view) {
+			if (view in views) {
+				const existingWindow = routerState.windows.find((window) => window.view === view);
+				if (existingWindow) {
+					bringWindowToFront(existingWindow.id, navigation.to.params.rest);
+				} else {
+					openWindow(view as keyof typeof views, navigation.to.params.rest);
+				}
 			}
+		} else {
+			showDesktop(true);
 		}
 	});
 

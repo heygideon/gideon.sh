@@ -108,12 +108,14 @@ export function minimiseWindow(id: string) {
 	windowMinimiseSound.play();
 }
 
-export function showDesktop() {
+export function showDesktop(silent = false) {
 	routerState.windows.forEach((w) => {
 		w.minimised = true;
 	});
 	routerState.order = [];
-	goto(resolve('/'), {});
 
-	windowMinimiseSound.play();
+	if (!silent) {
+		goto(resolve('/'), {});
+		windowMinimiseSound.play();
+	}
 }
