@@ -6,6 +6,7 @@
 	import type { PageData } from '../../routes/[...rest]/$types';
 	import { click } from '$lib/click';
 	import { clickSound } from '$lib/sfx';
+	import { entriesOf } from '$lib/object';
 
 	const pageData = getContext<() => PageData>('pageData');
 
@@ -63,25 +64,27 @@
 	<img src="/88x31.gif" alt="88x31 button" width={88} height={31} class="size-fit flex-none" />
 </div>
 
-<div class="space-y-6 p-3 pt-4">
-	<section>
-		<p class="mb-2 px-3 text-sm leading-none font-semibold text-stone-600">placeholder</p>
-		<div class="flex flex-wrap gap-2">
-			{#each webrings.placeholder as item}
-				<button
-					{@attach click(() => {
-						clickSound.play();
-						open(item.website, '_blank');
-					})}
-					class="flex w-28 flex-none flex-col items-center rounded-sm border border-transparent py-2 text-center hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
-				>
-					<img src={item.img} height="31" width="88" alt="" class="shadow-xs" />
-					<div class="mt-1.5 w-full px-3">
-						<p class="truncate">{item.name}</p>
-						<p class="truncate text-xs text-stone-600">{item.website}</p>
-					</div>
-				</button>
-			{/each}
-		</div>
-	</section>
+<div class="space-y-4 p-3 pt-4">
+	{#each entriesOf(webrings) as [key, items]}
+		<section>
+			<p class="mb-1 px-3 text-sm font-semibold text-stone-600">{key}</p>
+			<div class="flex flex-wrap gap-2">
+				{#each items as item}
+					<button
+						{@attach click(() => {
+							clickSound.play();
+							open(item.url, '_blank');
+						})}
+						class="flex w-28 flex-none flex-col items-center rounded-sm border border-transparent py-2 text-center hover:bg-amber-100 focus:border-amber-600 focus:bg-amber-100"
+					>
+						<img src={item.imgUrl} alt={item.name} width="88" height="31" class="shadow-xs" />
+						<div class="mt-1.5 w-full px-3 leading-snug">
+							<p class="truncate">{item.name}</p>
+							<p class="truncate text-xs text-stone-600">{new URL(item.url).hostname}</p>
+						</div>
+					</button>
+				{/each}
+			</div>
+		</section>
+	{/each}
 </div>
