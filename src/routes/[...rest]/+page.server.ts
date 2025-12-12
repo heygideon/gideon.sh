@@ -58,7 +58,7 @@ async function getHackClubWebring() {
 		}),
 		defineWebringMember({
 			name: 'sarvesh',
-			url: 'https://tarfish.github.io/',
+			url: 'https://sarvesh.hackclub.app/',
 			imgUrl: '/buttons/tarfish.png'
 		}),
 		defineWebringMember({
