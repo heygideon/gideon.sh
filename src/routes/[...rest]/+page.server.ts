@@ -42,9 +42,19 @@ async function getHackClubWebring() {
 			imgUrl: 'https://bomberfish.ca/button.gif'
 		}),
 		defineWebringMember({
+			name: 'junya',
+			url: 'https://cutiesin.tech',
+			imgUrl: 'https://cutiesin.tech/88x31/junya.gif'
+		}),
+		defineWebringMember({
 			name: 'valen',
 			url: 'https://valen.zip',
 			imgUrl: 'https://valen.zip/button-win98.gif'
+		}),
+		defineWebringMember({
+			name: 'prpl',
+			url: 'https://prpl.wtf/',
+			imgUrl: 'https://prpl.wtf/img/88x31/prpl_wtf.gif'
 		}),
 		defineWebringMember({
 			name: 'vvqb',
@@ -62,14 +72,14 @@ async function getHackClubWebring() {
 			imgUrl: '/buttons/tarfish.png'
 		}),
 		defineWebringMember({
-			name: 'josh',
-			url: 'https://os.slitrostudio.me',
-			imgUrl: 'https://site.slitrostudio.me/Slitro2.png'
-		}),
-		defineWebringMember({
 			name: 'dipa',
 			url: 'https://dipa-cotton.github.io/personalsite/',
 			imgUrl: '/buttons/dipa.png'
+		}),
+		defineWebringMember({
+			name: 'pk_industries',
+			url: 'https://pkindustry.org/',
+			imgUrl: '/buttons/pkindustries.png'
 		})
 	];
 }
