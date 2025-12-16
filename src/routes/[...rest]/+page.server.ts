@@ -47,6 +47,11 @@ async function getHackClubWebring() {
 			imgUrl: 'https://cutiesin.tech/88x31/junya.gif'
 		}),
 		defineWebringMember({
+			name: 'froppii',
+			url: 'https://froppii.dev',
+			imgUrl: 'https://froppii.dev/button.gif'
+		}),
+		defineWebringMember({
 			name: 'valen',
 			url: 'https://valen.zip',
 			imgUrl: 'https://valen.zip/button-win98.gif'
