@@ -68,6 +68,9 @@
 	{#each entriesOf(webrings) as [key, items]}
 		<section>
 			<p class="mb-1 px-3 text-sm font-semibold text-stone-600">{key}</p>
+			{#if key === 'page_ring'}
+				<pagering-link theme="light" class="mt-2 mb-2 px-3"></pagering-link>
+			{/if}
 			<div class="flex flex-wrap gap-2">
 				{#each items as item}
 					<button

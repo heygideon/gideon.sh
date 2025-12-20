@@ -29,6 +29,26 @@ async function getPlaceholderWebring() {
 		);
 }
 
+async function getPageWebring() {
+	const res = await fetch('https://pagering.gideon.sh/api/v1/members');
+	const data = (await res.json()) as Array<{
+		id: string;
+		name: string;
+		url: string;
+		buttonUrl: string;
+	}>;
+
+	return data
+		.filter((item) => item.name.toLowerCase() !== 'gideon')
+		.map((item) =>
+			defineWebringMember({
+				name: item.name,
+				url: item.url,
+				imgUrl: item.buttonUrl
+			})
+		);
+}
+
 async function getHackClubWebring() {
 	return [
 		defineWebringMember({
@@ -108,10 +128,11 @@ async function getProjects() {
 
 export const load: PageServerLoad = async () => {
 	const placeholder = await getPlaceholderWebring();
-	const hack_club = await getHackClubWebring();
+	const page_ring = await getPageWebring();
+	// const hack_club = await getHackClubWebring();
 	const projects = await getProjects();
 
 	const neocatIdx = Math.floor(Math.random() * neocats.length);
 
-	return { webrings: { placeholder, hack_club }, projects, neocatIdx };
+	return { webrings: { placeholder, page_ring }, projects, neocatIdx };
 };
