@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { setContext } from 'svelte';
+	import { setContext, hydratable } from 'svelte';
 
 	import { goto, afterNavigate } from '$app/navigation';
 	import { views } from '$lib/router/views';
@@ -42,7 +42,10 @@
 		}
 	});
 
-	let catIdx = $state(data.neocatIdx);
+	const initialCatIdx = hydratable('initialCatIdx', () =>
+		Math.floor(Math.random() * neocats.length)
+	);
+	let catIdx = $state(initialCatIdx);
 	let neocat = $derived(neocats[catIdx]);
 </script>
 
